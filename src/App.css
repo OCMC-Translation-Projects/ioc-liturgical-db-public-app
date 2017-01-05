@@ -1,0 +1,206 @@
+.App {
+    background-color: #f9f9f9;
+}
+
+.App-title {
+    color: gold;
+    padding: 10px 30px;
+}
+
+.App-nav {
+    padding: 10px 10px;
+}
+
+@media (max-width: 10800px) {
+    .nav li { display: none; float: right}
+    .nav:before { content: "\2261"; font-size: 30pt; }
+    .nav.visible li { display: block; font-size: 12pt; }
+}
+
+.App-content-row {
+}
+
+.App-header-nav-link {
+    padding: 10px;
+    color: white;
+    display: inline;
+}
+
+.App-info-anchor {
+    color: blue;
+}
+
+a {
+    color: white;
+}
+
+.App-logo {
+    color: gold;
+    padding: 18px;
+    float: right;
+}
+
+.App-home {
+    background-color: white;
+    max-width: 80%;
+}
+
+.App-header {
+    background-color: black;
+    height: 10%;
+    max-height: 10%;
+    padding: 0px 10px;
+    color: white;
+}
+
+.jumbotron {
+    padding: 10px;
+}
+
+.App-help {
+    margin: 5% 20%;
+    max-width: 60%;
+}
+
+.App-hymnographers {
+    margin: 5%;
+    max-width: 40%;
+    max-height: 40%;
+}
+
+.App-references {
+    margin: 5% 20%;
+    padding: 10px;
+}
+
+.App-footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.App-browser-queries {
+    padding: 10px 20px;
+}
+
+.App-browser-iFrame {
+    position: fixed;
+    background-color: black;
+}
+
+.App-header-title {
+}
+
+.App-home {
+    margin: 0% 20%;
+    max-width: 100%;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+}
+
+.App-intro {
+    margin: 5% 20%;
+    padding: 10px;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.active {
+    color: gold;
+}
+
+.control-label,  .resourceSelectorPrompt {
+    color: #5bc0de;
+}
+
+.App-login {
+    margin: 20%;
+}
+
+.App-col-selector {
+    width: 10px;
+    min-width: 10px;
+}
+.App-row-selector {
+    background-color: green;
+    max-width: 10px;
+}
+
+
+.App-search-form-option-label {
+    font-weight: 200;
+    padding: 10px;
+}
+.App-search-options {
+    background-color: white;
+}
+.App-search-text-input {
+    color: black;
+    background-color: white;
+    height: auto;
+    resize: vertical;
+    width: 90%
+}
+.App-search-by-id-parts-icon {
+    color: black;
+}
+.form-control {
+    color: black;
+    background-color: white;
+    height: auto;
+    resize: vertical;
+}
+
+
+.App-search-form {
+    background-color: #eaeced;
+}
+
+.App-search-results {
+    background-color: #eaeced;
+}
+
+.row {
+    margin: 0px;
+}
+
+.App-search-checkbox {
+    margin: 10px;
+}
+.react-bs-table table tr {
+    padding: 10px;
+}
+.react-bs-table table td {
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+}
+
+
+.fa {
+    padding: 10px;
+}
+
+.fa-info-circle {
+    color: green;
+}
+.fa-lightbulb-o {
+    color: darkgoldenrod;
+}
+.fa-exclamation-triangle {
+    color: red;
+}

@@ -1,0 +1,5 @@
+{
+  "server": "http://localhost:4567"
+  ,"adminApi": "/admin/api/v1/"
+  ,"dbApi": "/db/api/v1/"
+}
