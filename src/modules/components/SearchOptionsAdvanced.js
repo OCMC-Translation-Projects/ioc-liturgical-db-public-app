@@ -24,7 +24,7 @@ class SearchOptions extends Component {
       ,
       dropDownBooks: {
         show: false
-        , msg: "and selectedBook is:"
+        , msg: "and selected Book is:"
         , source: []
         , initialState: "*"
       }

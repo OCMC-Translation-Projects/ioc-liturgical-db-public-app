@@ -1,14 +1,19 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { Router, Route, hashHistory, IndexRoute } from 'react-router'
-import App from './modules/App'
-import About from './modules/About'
-import Search from './modules/Search'
-import Help from './modules/Help'
+import React from 'react';
+import { render } from 'react-dom';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import auth from './modules/components/Auth'
+import App from './modules/App';
+import About from './modules/pages/About';
+import Help from './modules/pages/Help';
+import Search from './modules/pages/Search';
+import Browser from './modules/pages/Browser';
+import Login from './modules/pages/Login'
+import Logout from './modules/pages/Logout'
+import server from './config/server';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-select/dist/react-select.css';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
-import './App.css'
+import './App.css';
 
 /**
  * To add a new route:
@@ -18,12 +23,30 @@ import './App.css'
  *
  */
 
+
+function requireAuth(nextState, replace) {
+  if (!auth.isAuthenticated()) {
+    replace({
+      pathname: '/login',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
+//  onEnter={requireAuth}
+
 render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Search}/>
-      <Route path="/about" component={About } />
+      {server.isReadOnly() ?
+          <IndexRoute component={Search } />
+          :
+          <IndexRoute component={Search } onEnter={requireAuth}/>
+      }
+      <Route path="/browser" component={Browser } onEnter={requireAuth}/>
+      <Route path="/about" component={About}/>
       <Route path="/help" component={Help}/>
+      <Route path="/login" component={Login}/>
+      <Route path="/logout" component={Logout} />
     </Route>
   </Router>
 ), document.getElementById('root'))

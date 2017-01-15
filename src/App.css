@@ -7,21 +7,33 @@
     padding: 10px 30px;
 }
 
+.App-menu {
+    background-color: black;
+}
+
 .App-nav {
     padding: 10px 10px;
 }
 
 @media (max-width: 10800px) {
     .nav li { display: none; float: right}
-    .nav:before { content: "\2261"; font-size: 30pt; }
-    .nav.visible li { display: block; font-size: 12pt; }
+    .nav:before { content: "\2261"; font-size: 30pt; padding-left: 5px;}
+    .nav.visible li { display: block; font-size: 12pt;}
 }
 
+.App-firstletter {
+    padding-left: 3px;
+    color: red;
+}
 .App-content-row {
+    text-align: left;
+    padding-top: 20px;
+    position: absolute;
+    z-index:-5;
+    overflow:auto;
 }
 
 .App-header-nav-link {
-    padding: 10px;
     color: white;
     display: inline;
 }
@@ -35,9 +47,21 @@ a {
 }
 
 .App-logo {
+    font-style: italic;
+    font-size: larger;
     color: gold;
-    padding: 18px;
-    float: right;
+    position: fixed;
+    top: 6px;
+    left: 50px;
+    right: 0;
+}
+
+.App-menu {
+    color: gold;
+    position: fixed;
+    top: 0;
+    left: 0px;
+    right: 0;
 }
 
 .App-home {
@@ -47,25 +71,22 @@ a {
 
 .App-header {
     background-color: black;
-    height: 10%;
-    max-height: 10%;
-    padding: 0px 10px;
+    padding-right: 60px;
+    padding-bottom: 65px;
     color: white;
+    z-index:10;
 }
 
 .jumbotron {
     padding: 10px;
 }
 
-.App-help {
+.App-page-logout {
+    padding-top: 20%;
+}
+.App-page-help {
     margin: 5% 20%;
     max-width: 60%;
-}
-
-.App-hymnographers {
-    margin: 5%;
-    max-width: 40%;
-    max-height: 40%;
 }
 
 .App-references {
@@ -90,6 +111,7 @@ a {
 
 .App-browser-iFrame {
     position: fixed;
+    padding-top: 0px;
     background-color: black;
 }
 
@@ -104,7 +126,34 @@ a {
     text-align: center;
 }
 
-.App-intro {
+.App-link {
+    color: blue;
+}
+.App-home {
+    text-align: left;
+    margin: 5% 20%;
+    padding: 10px;
+}
+
+.App-bars {
+    color: darkgoldenrod;
+}
+
+.App-home-image {
+    margin-top: 10px;
+}
+
+.App-page-about {
+    margin: 5% 20%;
+    padding: 10px;
+}
+
+.App-page-texts {
+    margin: 5% 20%;
+    padding: 10px;
+}
+
+.App-page-oslw {
     margin: 5% 20%;
     padding: 10px;
 }
@@ -139,9 +188,9 @@ a {
     max-width: 10px;
 }
 
-
 .App-search-form-option-label {
     font-weight: 200;
+    color: #007eff;
     padding: 10px;
 }
 .App-search-options {

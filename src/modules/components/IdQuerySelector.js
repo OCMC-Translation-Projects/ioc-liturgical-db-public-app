@@ -58,7 +58,6 @@ class IdQuerySelector extends Component {
   }
 
   createCheckbox = item => {
-    console.log("createCheckBox(item): " + item.label + ", " + item.key);
     if (this.state.itemsLoaded) {
       return  (
           <Checkbox
