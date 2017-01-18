@@ -7,7 +7,6 @@ export default React.createClass({
     return (
     <div className="App-help-doc-regex-search">
       <div className="jumbotron">
-        <h2>Regular Expressions</h2>
         <p>The use of regular expressions is a powerful but very advanced feature.  To learn about regular expressions in general, search the Internet. The following information specific to this database is adapted from a Neo4j manual:</p>
         <p>The regular expression syntax used by the database is inherited from the Java regular expressions. This includes support for flags that change how strings are matched, including case-insensitive (?i), multiline (?m) and dotall (?s). Flags are given at the start of the regular expression.</p>
         <p>If the string you want does not occur at the start of the property, it is necessary to put <em>.*</em> before the string.  And, if it does not occur at the end, it is necessary to put <em>.*</em> at the end. For example, doing a regular expression search using the expression <em>blessed</em> will only find docs that both start with and end with <em>blessed</em>.  There are none.  The expression <em>blessed.*</em> will find docs that start with the word <em>blessed</em>.  The expression <em>.*blessed</em> will find docs that end with the word <em>blessed</em>. And the expression <em>.*blessed.*</em> will find docs that have the word <em>blessed</em> anywhere in the text. This is such a simple example that you would not use a regular expression. But, it illustrates the use of <em>.*</em> when creating regular expressions.</p>

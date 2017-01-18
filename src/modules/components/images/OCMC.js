@@ -3,6 +3,6 @@ import ocmc from './graphics/ocmc.png'
 
 export default React.createClass({
   render() {
-    return <img role="presentation" src={ocmc} height="30px" width="60px"/>
+    return <img className="App-img App-img-ocmc" role="presentation" src={ocmc} height="20px" width="50px"/>
   }
 })

@@ -7,7 +7,6 @@ export default React.createClass({
     return (
     <div className="App-help-doc-search-results">
       <div className="jumbotron">
-        <h2>Search Results</h2>
         <p>Below is an example of the result of searching for the phrase <em>kingdom of God</em></p>
         <SsSearchResultYourKingdomOf />
         <p>There are many things to note about the screen shot above...</p>

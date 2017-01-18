@@ -8,7 +8,6 @@ export default React.createClass({
     return (
         <div className="App-help-doc-simple-search">
           <div className="jumbotron">
-            <h2>ID Parts Search</h2>
             <p>The ID parts search buttons appear after you have selected a row from the results of either a <em>Simple</em> search or a <em>Advanced</em> search.</p>
             <p>For example, before selecting a row, it might look like this:</p>
             <SsBeforeSelection/>

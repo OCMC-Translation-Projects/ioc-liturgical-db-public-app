@@ -4,7 +4,6 @@ export default React.createClass({
     return (
     <div className="App-help-doc-props">
       <div className="jumbotron">
-        <h2>Understanding the Doc Properties</h2>
         <p>Each biblical and liturgical doc stored in the database has the following properties:</p>
         <ol>
           <li>ID</li>

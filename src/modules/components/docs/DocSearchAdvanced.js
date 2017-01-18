@@ -8,7 +8,6 @@ export default React.createClass({
     return (
     <div className="App-help-doc-advanced-search">
       <div className="jumbotron">
-        <h2>Advanced Search</h2>
         <p>The advanced search displays after you click on the link that says <em>Advanced</em> when you are on the <em>Search</em> page.</p>
         <p>It looks like this when it first displays:</p>
         <SsInitial />

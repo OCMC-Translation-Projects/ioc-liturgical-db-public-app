@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import server from '../../config/server';
-import SearchOptionsAdvanced from "../components/SearchOptionsAdvanced"
-import SearchOptionsSimple from "../components/SearchOptionsSimple"
+import SearchOptionsAdvanced from "../components/SearchOptionsAdvanced";
+import SearchOptionsSimple from "../components/SearchOptionsSimple";
+import ModalCompareDocs from '../components/ModalCompareDocs';
 import FontAwesome from 'react-fontawesome';
+import {Panel, PanelGroup} from 'react-bootstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import auth from '../components/Auth';
 
@@ -54,21 +56,13 @@ export class Search extends React.Component {
       ,
       docPropMessageByValueSensitive: "Search By Value (sensitive) is sensitive to accents, case, and punctuation."
       ,
-      message: "Important messages will appear here..."
-      ,
-      messageIcon: this.messageIcons.info
-      ,
       searchFormToggle: this.messageIcons.toggleOff
       ,
       showSearchForm: true
       ,
-      advancedSearchFormToggle: this.messageIcons.toggleOn
+      filterMessage: "You can use the box below to filter the results."
       ,
-      searchFormToggleMessage: "show advanced options"
-      ,
-      simpleSearchMessage: "hide advanced options"
-      ,
-      advancedSearchMessage: "show advanced options"
+      selectMessage: "To view docs with the same topic and key, click the radio button of the row you are interested in."
       ,
       searchFormType: "simple"
       ,
@@ -86,9 +80,10 @@ export class Search extends React.Component {
       ,
       selectRow: {
         mode: 'radio' // or checkbox
-        , hideSelectColumn: true
-        , clickToSelect: true
+        , hideSelectColumn: false
+        , clickToSelect: false
         , onSelect: this.handleRowSelect
+        , className: "App-row-select"
       }
       ,
       showSelectionButtons: false
@@ -104,7 +99,8 @@ export class Search extends React.Component {
       ]
       ,
       showIdPartSelector: false
-      ,
+      , showModalCompareDocs: false
+      , idColumnSize: "80px"
     };
     this.handleIdQuerySelection = this.handleIdQuerySelection.bind(this);
     this.fetchData = this.fetchData.bind(this);
@@ -114,7 +110,7 @@ export class Search extends React.Component {
     this.handleAdvancedSearchSubmit = this.handleAdvancedSearchSubmit.bind(this);
     this.handleSimpleSearchSubmit = this.handleSimpleSearchSubmit.bind(this);
     this.getSearchForm = this.getSearchForm.bind(this);
-    this.searchFormOptions = this.searchFormOptions.bind(this);
+    this.getSearchAccordion = this.getSearchAccordion.bind(this);
     this.searchFormOptionIcons = this.searchFormOptionIcons.bind(this);
     this.handleSearchFormTypeChange = this.handleSearchFormTypeChange.bind(this);
     this.toogleIdPattern = this.toogleIdPattern.bind(this);
@@ -122,8 +118,10 @@ export class Search extends React.Component {
     this.handleCompareRequest = this.handleCompareRequest.bind(this);
     this.handleExpandRequest = this.handleExpandRequest.bind(this);
     this.getSelectedDocOptions = this.getSelectedDocOptions.bind(this);
-    this.getTopicRegEx = this.getTopicRegEx.bind(this);
-    this.getKeyRegEx = this.getKeyRegEx.bind(this);
+    this.showRowComparison = this.showRowComparison.bind(this);
+    this.getDocComparison = this.getDocComparison.bind(this);
+    this.handleCloseDocComparison = this.handleCloseDocComparison.bind(this);
+    this.getBars = this.getBars.bind(this);
   }
 
   componentWillMount = () => {
@@ -275,84 +273,63 @@ export class Search extends React.Component {
     }
   }
 
+   getSearchAccordion() {
+         return (
+             <PanelGroup defaultActiveKey="1" accordion>
+               <Panel  header="Simple Search" eventKey="1">
+                 <SearchOptionsSimple
+                     valueTitle=""
+                     placeholder="enter a word or phrase and press the search icon..."
+                     handleSubmit={this.handleSimpleSearchSubmit}
+                 />
+               </Panel>
+               <Panel header="Advanced Search" eventKey="2">
+                 {this.state.dropdowns ?
+                     <SearchOptionsAdvanced
+                         docTypes={this.state.docTypes}
+                         dropDowns={this.state.dropdowns}
+                         properties={this.state.propertyTypes}
+                         propertyTitle="and property:"
+                         matchers={this.state.matcherTypes}
+                         matcherTitle=""
+                         valueTitle=""
+                         handleSubmit={this.handleAdvancedSearchSubmit}
+                     />
+                     : "Loading dropdowns for advanced search..."}
+               </Panel>
+             </PanelGroup>
+         );
+   }
 
-  searchFormOptions(id) {
-    return (
-        <div>
-          Search form:
-        <label className="App-search-checkbox">
-              <input
-                  type="radio"
-                  name="docprop"
-                  value="id"
-                  onChange={this.handleSearchFormTypeChange}
-                  checked={this.state.docProp === 'id'}
-              />
-               <span className="control-label App-search-form-option-label">simple</span>
-            </label>
-            <label className="App-search-checkbox">
-              <input
-                  type="radio"
-                  name="docprop"
-                  value="nnp"
-                  onChange={this.handleSearchFormTypeChange}
-                  checked={this.state.docProp === 'nnp'}
-              />
-              <span className="control-label App-search-form-option-label">advanced</span>
-            </label>
-          {id.length > 0 &&
-            <label className="App-search-checkbox">
-              <input
-                  type="radio"
-                  name="docprop"
-                  value="value"
-                  onChange={this.handleSearchFormTypeChange}
-                  checked={this.state.docProp === 'value'}
-              />
-              <span className="control-label App-search-form-option-label">ID parts</span>
-            </label>
-          }
-      </div>
-    );
-  }
-  getSearchForm(type) {
-    switch(type) {
-      case (this.searchFormTypes.advanced): {
-        return (
-            <SearchOptionsAdvanced
-                docTypes={this.state.docTypes}
-                dropDowns={this.state.dropdowns}
-                properties={this.state.propertyTypes}
-                propertyTitle="and property:"
-                matchers={this.state.matcherTypes}
-                matcherTitle=""
-                valueTitle=""
-                handleSubmit={this.handleAdvancedSearchSubmit}
-            />
-        );
-      }
-      default: {
-        return (
-            <SearchOptionsSimple
-                valueTitle=""
-                placeholder="enter a word or phrase and press the search icon..."
-                handleSubmit={this.handleSimpleSearchSubmit}
-            />
-        );
-      }
-    }
-  }
-
-  getKeyRegEx() {
-
-  }
-
-  getTopicRegEx() {
-
+   getSearchForm(type) {
+     switch(type) {
+       case (this.searchFormTypes.advanced): {
+         return (
+             <SearchOptionsAdvanced
+                 docTypes={this.state.docTypes}
+                 dropDowns={this.state.dropdowns}
+                 properties={this.state.propertyTypes}
+                 propertyTitle="and property:"
+                 matchers={this.state.matcherTypes}
+                 matcherTitle=""
+                 valueTitle=""
+                 handleSubmit={this.handleAdvancedSearchSubmit}
+             />
+         );
+       }
+       default: {
+         return (
+             <SearchOptionsSimple
+                 valueTitle=""
+                 placeholder="enter a word or phrase and press the search icon..."
+                 handleSubmit={this.handleSimpleSearchSubmit}
+             />
+         );
+       }
+     }
   }
 
   handleCompareRequest() {
-    console.log(this.state.selectedIdParts);
     if (this.state.selectedIdParts) {
       this.setState({
             domain: "*"
@@ -394,7 +371,6 @@ export class Search extends React.Component {
   }
 
   getSelectedDocOptions() {
-    console.log("greetings");
     return (
         <div>Selected doc: <span className="App-selected">{this.state.selectedID}</span>
           <span
@@ -478,7 +454,35 @@ export class Search extends React.Component {
         {key: "key", label: idParts[2]}
       ]
       , showIdPartSelector: true
-    }, this.showSelectionButtons(row["doc.id"]));
+      , showModalCompareDocs: true
+    }, this.showRowComparison(row["doc.id"]));
+  }
+//    }, this.showSelectionButtons(row["doc.id"]));
+
+  showRowComparison = (id) => {
+    console.log(id);
+    this.setState({
+      showModalCompareDocs: true
+      , selectedID: id
+    })
+  }
+
+  handleCloseDocComparison = () => {
+    this.setState({
+      showModalCompareDocs: false
+    })
+  }
+
+  getDocComparison = () => {
+    return (
+        <ModalCompareDocs
+            showModal={this.state.showModalCompareDocs}
+            title={this.state.selectedID}
+            docType={this.state.docType}
+            selectedIdParts={this.state.selectedIdParts}
+            onClose={this.handleCloseDocComparison}
+        />
+    )
   }
 
   showSelectionButtons = (id) => {
@@ -550,7 +554,7 @@ export class Search extends React.Component {
           );
           let message = "No docs found...";
           if (response.data.valueCount && response.data.valueCount > 0) {
-            message = "Found " + response.data.valueCount + " docs.  You can filter the docs using the box below..."
+            message = "Found " + response.data.valueCount + " docs."
           }
           this.setState({
                 message: message
@@ -588,20 +592,20 @@ export class Search extends React.Component {
 
 //          <div>Search Form: <FontAwesome onClick={this.toggleSearchForm} name={this.state.searchFormToggle}/>{this.state.searchFormToggleMessage}</div>
 
+  getBars = () => {
+      return (
+        <span><FontAwesome name="bars"/></span>
+      )
+    };
 
   render() {
     return (
-        <div className="App-search">
-          <h3>Search the IOC Liturgical Database</h3>
-          <div>{this.searchFormOptionIcons()}</div>
+        <div className="App-page App-search">
+          <h3>Search the Database</h3>
           <div className="App-search-form">
             <div className="row">
               <div className="col-sm-12 col-md-12 col-lg-12">
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-sm-12 col-md-12 col-lg-12">
-                {this.getSearchForm(this.state.searchFormType)}
+                {this.getSearchAccordion(this.state.searchFormType)}
               </div>
             </div>
           </div>
@@ -609,7 +613,14 @@ export class Search extends React.Component {
           <div>Search Result: <span className="App-message"><FontAwesome
               name={this.state.messageIcon}/>{this.state.message}</span>
           </div>
+          {this.state.showSearchResults &&
+              <div>
+                {this.state.filterMessage}
+                {this.state.selectMessage}
+              </div>
+          }
           {this.state.showSelectionButtons && this.getSelectedDocOptions()}
+          {this.state.showModalCompareDocs && this.getDocComparison()}
           {this.state.showSearchResults &&
           <div className="App-search-results">
             <div className="row">
@@ -629,23 +640,23 @@ export class Search extends React.Component {
                     dataField='doc.id'
                     dataSort={ true }
                     hidden
-                    width='1px'>ID</TableHeaderColumn>
+                    >ID</TableHeaderColumn>
                 <TableHeaderColumn
                     dataField='doc.domain'
                     dataSort={ true }
-                    width='10%'>Domain</TableHeaderColumn>
+                    width={this.state.idColumnSize}>Domain</TableHeaderColumn>
                 <TableHeaderColumn
                     dataField='doc.topic'
                     dataSort={ true }
-                    width='10%'>Topic</TableHeaderColumn>
+                    width={this.state.idColumnSize}>Topic</TableHeaderColumn>
                 <TableHeaderColumn
                     dataField='doc.key'
                     dataSort={ true }
-                    width='10%'>Key</TableHeaderColumn>
+                    width={this.state.idColumnSize}>Key</TableHeaderColumn>
                 <TableHeaderColumn
                     dataField='doc.value'
                     dataSort={ true }
-                    width='60%'>Value</TableHeaderColumn>
+                    >Value</TableHeaderColumn>
               </BootstrapTable>
             </div>
           </div>

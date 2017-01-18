@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router';
 import auth from './modules/components/Auth'
 import App from './modules/App';
 import About from './modules/pages/About';
@@ -10,7 +10,7 @@ import Browser from './modules/pages/Browser';
 import Login from './modules/pages/Login'
 import Logout from './modules/pages/Logout'
 import server from './config/server';
-import 'bootstrap/dist/css/bootstrap.css';
+//import 'bootstrap/dist/css/bootstrap.css';
 import 'react-select/dist/react-select.css';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import './App.css';
@@ -21,6 +21,8 @@ import './App.css';
  * 2. add the new route to /modules/Header.js
  * 3. add the new route to here...
  *
+ * Note: /public/index.html has a redirect to /search
+ * when the page loads: window.location = "/#/search";
  */
 
 
@@ -38,10 +40,11 @@ render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       {server.isReadOnly() ?
-          <IndexRoute component={Search } />
+          <Route path="/search" component={Search } />
           :
-          <IndexRoute component={Search } onEnter={requireAuth}/>
+          <Route  path="/search" component={Search } onEnter={requireAuth}/>
       }
+      <Route path="/home" component={Search } />
       <Route path="/browser" component={Browser } onEnter={requireAuth}/>
       <Route path="/about" component={About}/>
       <Route path="/help" component={Help}/>

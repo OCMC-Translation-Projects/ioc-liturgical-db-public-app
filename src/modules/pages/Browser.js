@@ -9,7 +9,7 @@ export class Browser extends React.Component {
 
   render() {
     return (
-          <div className="App-browser-iFrame">
+          <div className="App-page App-browser-iFrame">
             <Iframe url={server.getDbServerPath()} height="100%" width="100%"/>
           </div>
     )

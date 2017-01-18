@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.13e2efdc.css",
-  "main.css.map": "static/css/main.13e2efdc.css.map",
-  "main.js": "static/js/main.b4e9cf3a.js",
-  "main.js.map": "static/js/main.b4e9cf3a.js.map",
+  "main.css": "static/css/main.1d695722.css",
+  "main.css.map": "static/css/main.1d695722.css.map",
+  "main.js": "static/js/main.8332cf00.js",
+  "main.js.map": "static/js/main.8332cf00.js.map",
   "static/media/ScreenShotAvancedSearchInitial.png": "static/media/ScreenShotAvancedSearchInitial.ec35f915.png",
   "static/media/ScreenShotBiblicalOptions.png": "static/media/ScreenShotBiblicalOptions.5474c676.png",
   "static/media/ScreenShotComparison.png": "static/media/ScreenShotComparison.7d40e7be.png",
@@ -14,12 +14,8 @@
   "static/media/ScreenShotSearchResultsYourKingdomOf.png": "static/media/ScreenShotSearchResultsYourKingdomOf.76a9e18e.png",
   "static/media/ScreenShotSearchTypes.png": "static/media/ScreenShotSearchTypes.7233b081.png",
   "static/media/ScreenShotShowingRows.png": "static/media/ScreenShotShowingRows.67863691.png",
-  "static/media/globe.png": "static/media/globe.1e99271c.png",
-  "static/media/glyphicons-halflings-regular.eot": "static/media/glyphicons-halflings-regular.f4769f9b.eot",
-  "static/media/glyphicons-halflings-regular.svg": "static/media/glyphicons-halflings-regular.89889688.svg",
-  "static/media/glyphicons-halflings-regular.ttf": "static/media/glyphicons-halflings-regular.e18bbf61.ttf",
-  "static/media/glyphicons-halflings-regular.woff": "static/media/glyphicons-halflings-regular.fa277232.woff",
-  "static/media/glyphicons-halflings-regular.woff2": "static/media/glyphicons-halflings-regular.448c34a5.woff2",
+  "static/media/el.ico": "static/media/el.8bfb13cb.ico",
+  "static/media/en.ico": "static/media/en.8b5e02f5.ico",
   "static/media/me.m01.d06.meVE.Apolytikion1.text.png": "static/media/me.m01.d06.meVE.Apolytikion1.text.ccf6e6db.png",
-  "static/media/ocmc.png": "static/media/ocmc.fcbb3ad1.png"
+  "static/media/ocmc-globe.png": "static/media/ocmc-globe.2603f6b5.png"
 }

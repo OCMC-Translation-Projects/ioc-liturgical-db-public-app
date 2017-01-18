@@ -6,7 +6,6 @@ export default React.createClass({
     return (
     <div className="App-help-doc-simple-search">
       <div className="jumbotron">
-        <h2>Simple Search</h2>
         <p>The simple search displays automatically when you first access the <em>Search</em> page. If you have switched to the <em>Advanced</em> search or the <em>ID Parts</em> search, click on the link for <em>Simple</em> to return to the Simple search.</p>
         <p>To use it:</p>
         <ol>
