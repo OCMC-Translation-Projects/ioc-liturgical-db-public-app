@@ -8,7 +8,6 @@ import DocSearchTypes from '../components/docs/DocSearchTypes';
 import DocSimpleSearch from '../components/docs/DocSimpleSearch';
 import DocSearchResults from '../components/docs/DocSearchResults';
 import DocSearchAdvanced from '../components/docs/DocSearchAdvanced';
-import DocIdPartsSearch from '../components/docs/DocIdPartsSearch';
 import DocRegEx from '../components/docs/DocSearchRegularExpressions';
 import {Panel, Accordion} from "react-bootstrap"
 
@@ -40,9 +39,6 @@ export class Help extends React.Component {
               </Panel>
               <Panel header="Advanced Search" eventKey="6">
                 <DocSearchAdvanced/>
-              </Panel>
-              <Panel header="ID Parts Search" eventKey="7">
-                <DocIdPartsSearch/>
               </Panel>
               <Panel header="Regular Expression Search" eventKey="8">
                 <DocRegEx/>
