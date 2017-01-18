@@ -6,10 +6,10 @@ const adminApi = "/admin/api/v1/";
 const dbApi = "/db/api/v1/";
 const user = "/user/";
 const useRemoteNet = false;
-const useRemoteOrg = false;
+const useRemoteOrg = true;
 
 var getDbServer = () => {
-  if (document.location.hostname === "localhost") {
+  if (document.location.hostname === "localhost" || document.location.hostname.endsWith("c9users.io")) {
     if (useRemoteNet) {
       return "https://www.ioc-liturgical-db.net";
     } else if (useRemoteOrg) {
@@ -36,7 +36,8 @@ var getWsServer = () => {
 
 module.exports = {
   isReadOnly: () => {
-    return document.location.hostname.endsWith("org") || document.location.hostname === "localhost";
+    console.log(document.location.hostname);
+    return document.location.hostname.endsWith("org") || document.location.hostname === "localhost" || document.location.hostname.endsWith("c9users.io");
   },
   getDbUserAuthPath: () => {
     return getDbServer() + user;

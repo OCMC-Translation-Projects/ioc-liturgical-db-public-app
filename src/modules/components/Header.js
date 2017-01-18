@@ -1,7 +1,6 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import Logo from './images/Logo';
 import Flag from './images/Flag';
 import auth from './Auth';
 import FontAwesome from 'react-fontawesome';
