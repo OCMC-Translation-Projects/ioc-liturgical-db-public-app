@@ -18,6 +18,7 @@ class SearchOptions extends Component {
 
   handleSubmit = (event) => {
     this.props.handleSubmit(this.state.value);
+    event.preventDefault();
   }
 
   render() {
@@ -25,19 +26,22 @@ class SearchOptions extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
+              <form onSubmit={this.handleSubmit}>
               <div className="control-label">{this.props.valueTitle}</div>
-              <input
-                  type="text"
-                  placeholder={this.props.placeholder}
-                  onChange={this.setValue}
-                  className="App-search-text-input"
-                  name="search"/>
-              <span className="App-text-search-icon" >
-                  <FontAwesome
-                      onClick={this.handleSubmit}
-                      name={"search"}/>
+                <input
+                    type="text"
+                    placeholder={this.props.placeholder}
+                    onChange={this.setValue}
+                    className="App-search-text-input"
+                    name="search"/>
+                <span className="App-text-search-icon" >
+                    <FontAwesome
+                        type="submit"
+                        onClick={this.handleSubmit}
+                        name={"search"}/>
                 </span>
-            </div>
+            </form>
+          </div>
           </div>
         </div>
     );

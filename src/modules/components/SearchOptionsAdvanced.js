@@ -17,7 +17,7 @@ class SearchOptions extends Component {
       , dropdowns: {Biblical: [], Liturgical: [], loaded: false}
       , dropDownDomains: {
         show: false
-        , msg: "and domain is:"
+        , msg: this.props.labels.domainIs
         , source: []
         , initialState: "*"
       }
@@ -117,6 +117,7 @@ class SearchOptions extends Component {
         , this.state.matcher
         , this.state.value
     );
+    event.preventDefault();
   }
 
   handleDomainChange = (selection) => {
@@ -149,7 +150,7 @@ class SearchOptions extends Component {
         break;
       }
       case "Biblical": {
-        msg = "and domain is:";
+        msg = this.props.labels.domainIs;
         show = true;
         if (this.state.dropdowns.loaded) {
           source = this.state.dropdowns.Biblical.domains;
@@ -157,7 +158,7 @@ class SearchOptions extends Component {
         break;
       }
       case "Liturgical": {
-        msg = "and domain is:";
+        msg = this.props.labels.domainIs;
         show = true;
         if (this.state.dropdowns.loaded) {
           source = this.state.dropdowns.Liturgical.domains;
@@ -190,7 +191,6 @@ class SearchOptions extends Component {
 
 
   setGenericBookDropdown(type) {
-    console.log(this.props.dropdowns);
     let msg = "and selectedBook is:";
     let show = false;
     let source = {};
@@ -303,7 +303,7 @@ class SearchOptions extends Component {
             <div className="row">
               <div className="col-sm-12 col-md-12 col-lg-12">
                 <ResourceSelector
-                    title="Find Doc(s) where type is..."
+                    title={this.props.labels.findWhereTypeIs}
                     initialValue={this.state.docType}
                     resources={this.props.docTypes}
                     changeHandler={this.handleDocTypeChange}
@@ -314,7 +314,7 @@ class SearchOptions extends Component {
             <div className="row">
               <div className="col-sm-12 col-md-12 col-lg-12">
                 <ResourceSelector
-                    title={this.state.dropDownDomains.msg}
+                    title={this.props.labels.domainIs}
                     initialValue="*"
                     resources={this.state.dropDownDomains.source}
                     changeHandler={this.handleDomainChange}
@@ -351,7 +351,7 @@ class SearchOptions extends Component {
           <div className="row">
             <div className="col-sm-12">
               <ResourceSelector
-                  title={this.props.propertyTitle}
+                  title={this.props.labels.propertyIs}
                   initialValue=""
                   resources={this.props.properties}
                   changeHandler={this.handlePropertyChange}
@@ -362,17 +362,20 @@ class SearchOptions extends Component {
                   resources={this.props.matchers}
                   changeHandler={this.handleMatcherChange}
               />
-              <div className="control-label">{this.props.valueTitle}</div>
+              <form onSubmit={this.handleSubmit}>
+                <div className="control-label"></div>
               <input
                   type="text"
                   onChange={this.handleValueChange}
                   className="App-search-text-input"
                   name="search"/>
-              <span className="App-text-search-icon" >
-                  <FontAwesome
-                      onClick={this.handleSubmit}
-                      name={"search"}/>
+                <span className="App-text-search-icon" >
+                    <FontAwesome
+                        type="submit"
+                        onClick={this.handleSubmit}
+                        name={"search"}/>
                 </span>
+              </form>
             </div>
           </div>
         </div>
@@ -384,12 +387,9 @@ SearchOptions.propTypes = {
   docTypes: PropTypes.array.isRequired
   , dropDowns: PropTypes.object.isRequired
   , properties: PropTypes.array.isRequired
-  , propertyTitle: PropTypes.string.isRequired
   , matchers: PropTypes.array.isRequired
-  , matcherTitle: PropTypes.string.isRequired
-  , valueTitle: PropTypes.string.isRequired
   , handleSubmit: PropTypes.func.isRequired
+  , labels: PropTypes.object.isRequired
 };
-
 
 export default SearchOptions;

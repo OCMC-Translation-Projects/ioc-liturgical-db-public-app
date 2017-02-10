@@ -11,14 +11,14 @@ div.container-fluid {
 }
 .App-img-logo {
     position: fixed;
-    top: 13px;
+    top: 18px;
     z-index: 2000;
 }
 .App-title {
-    z-index: 9999;
+    z-index: 8999;
     position: absolute;
-    top: 18px;
-    left: 100px;
+    top: 23px;
+    left: 110px;
     color: gold;
     font-size: large;
     font-style: italic;
@@ -33,6 +33,15 @@ div.container-fluid {
 }
 .App-search-form {
     padding-top: 15px;
+}
+.App-search-panel {
+    cursor: pointer;
+}
+.App-text-search-icon {
+    cursor: pointer;
+}
+.panel-title {
+    cursor: pointer;
 }
 .Navbar.Collapse {
     position: fixed;
@@ -161,13 +170,13 @@ a.collapsed {
 div[class*='App-page'] {
     margin-top: 80px;
 }
-@media (max-width: 320px) {
+@media (max-width: 875px) {
     .App-img-logo {
-        top: 6px;
+        top: 9px;
     }
     .App-title {
-        top: 13px;
-        font-size: 16px;
+        top: 14px;
+        font-size: 15px;
     }
     .navbar-header {
         float: none;

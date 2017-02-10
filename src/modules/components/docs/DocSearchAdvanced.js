@@ -8,50 +8,79 @@ export default React.createClass({
     return (
     <div className="App-help-doc-advanced-search">
       <div className="jumbotron">
-        <p>The advanced search displays after you click on the link that says <em>Advanced</em> when you are on the <em>Search</em> page.</p>
-        <p>It looks like this when it first displays:</p>
+        <p>
+          {this.props.labels.secDocSearchAdvancedP01}
+        </p>
         <SsInitial />
-        <p>To use it:</p>
+        <p>
+          {this.props.labels.secDocSearchAdvancedP02}
+        </p>
         <ol>
-          <li>Select the type of doc you want to search for from the dropdown labeled <em>Find Doc(s) where type is...</em>.</li>
+          <li>
+            {this.props.labels.secDocSearchAdvancedP03}
+          </li>
           <ul>
-            <li>Any</li>
-            <li>Biblical</li>
-            <li>Liturgical</li>
+            <li>{this.props.labels.secDocSearchAdvancedP04}</li>
+            <li>{this.props.labels.secDocSearchAdvancedP05}</li>
+            <li>{this.props.labels.secDocSearchAdvancedP06}</li>
           </ul>
-          <li>Select the domain from the dropdown labeled <em>and domain is:</em>.</li>
+          <li>
+            {this.props.labels.secDocSearchAdvancedP07}
+          </li>
         </ol>
-        <p>If you select Biblical as the search doc type, and select the <em>NT - Greek - Patriarchal</em> domain, and the book of <em>Acts</em>, and chapter 1, you will see the following:</p>
+        <p>
+          {this.props.labels.secDocSearchAdvancedP08}
+        </p>
         <SsBiblicalInitial/>
-        <p>If you select Liturgical as the search doc type, and <em>Common Orthodox Church</em> as the domain, and <em>Menaion</em> as the book, and <em>January</em> as the month, you will see the following:</p>
+        <p>
+          {this.props.labels.secDocSearchAdvancedP09}
+        </p>
       <SsLiturgicalInitial/>
-        <p>Once you get this far, you can either click on the search icon <FontAwesome name="search"/>, or you can set property options.</p>
-        <p>To set property options for an advanced search, do the following:</p>
+        <p>
+          {this.props.labels.secDocSearchAdvancedP10} {this.props.labels.secDocSearchAdvancedP11}
+        </p>
+        <p>
+          {this.props.labels.secDocSearchAdvancedP12}
+        </p>
         <ol>
-          <li>Select the property:</li>
+          <li>{this.props.labels.secDocSearchAdvancedP13}</li>
             <ul>
               <li>ID</li>
               <li>Value (insensitive)</li>
               <li>Value (sensitive)</li>
             </ul>
-          <li>Select the part of the property to search:</li>
+          <li>{this.props.labels.secDocSearchAdvancedP14}</li>
             <ul>
               <li>contains</li>
               <li>starts with</li>
               <li>ends with</li>
               <li>matches regular expression</li>
             </ul>
-          <li>Enter the word or phrase to search for, or if it is a regular expression, enter the regular expression.</li>
-          <li>Click on the search icon <FontAwesome name="search"/></li>
+          <li>
+            {this.props.labels.secDocSearchAdvancedP19}
+          </li>
+          <li>
+            {this.props.labels.secDocSearchAdvancedP20} <FontAwesome name="search"/>
+          </li>
         </ol>
-        <p>Notes:</p>
+        <p>{this.props.labels.secDocSearchAdvancedP21}:</p>
         <ul>
-          <li><em>contains</em> means the property has this word or phrase anywhere in the property value.</li>
-          <li><em>starts with</em> means the desired word or phrase must occur at the beginning of the property value.</li>
-          <li><em>ends with</em> means the desired word or phrase must occur at the end of the property value.</li>
-          <li><em>matches regular expression</em> means that you are not entering a simple word or phrase, but you are using a special tool known as a regular expression. See below.</li>
+          <li>
+            {this.props.labels.secDocSearchAdvancedP22}
+          </li>
+          <li>
+            {this.props.labels.secDocSearchAdvancedP23}
+          </li>
+          <li>
+            {this.props.labels.secDocSearchAdvancedP24}
+          </li>
+          <li>
+            {this.props.labels.secDocSearchAdvancedP25}
+          </li>
         </ul>
-        <p>Tip: In a dropdown, if you start typing, it will filter the dropdown values to match what you are typing.</p>
+        <p>
+          {this.props.labels.secDocSearchAdvancedP26}
+        </p>
       </div>
     </div>
     )

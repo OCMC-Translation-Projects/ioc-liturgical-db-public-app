@@ -16,7 +16,7 @@ export class ModalCompareDocs extends React.Component {
 
     this.state = {
       showSearchResults: false
-      , message: "Important messages will appear here..."
+      , message: this.props.labels.msg1
       ,
       messageIcon: this.messageIcons.info
       ,
@@ -105,7 +105,7 @@ export class ModalCompareDocs extends React.Component {
   }
 
   fetchData() {
-    this.setState({message: "Searching...", messageIcon: this.messageIcons.info});
+    this.setState({message: this.props.labels.msg2, messageIcon: this.messageIcons.info});
     let config = {
       auth: {
         username: auth.getUsername()
@@ -123,7 +123,6 @@ export class ModalCompareDocs extends React.Component {
             + "&m=" + encodeURIComponent(this.state.matcher)
         ;
     let path = server.getWsServerDbApi() + 'docs' + parms;
-    console.log(path);
     axios.get(path, config)
         .then(response => {
           this.setState({
@@ -132,7 +131,12 @@ export class ModalCompareDocs extends React.Component {
           );
           let message = "No docs found...";
           if (response.data.valueCount && response.data.valueCount > 0) {
-            message = "Found " + response.data.valueCount + " docs."
+            message = this.props.labels.msg3
+                + " "
+                + response.data.valueCount
+                + " "
+                + this.props.labels.msg4
+                + "."
           }
           this.setState({
                 message: message
@@ -170,7 +174,7 @@ export class ModalCompareDocs extends React.Component {
                 <Modal.Title>{this.props.title}</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <div>Search Result: <span className="App-message"><FontAwesome
+                <div>{this.props.labels.resultLabel}: <span className="App-message"><FontAwesome
                     name={this.state.messageIcon}/>{this.state.message}</span>
                 </div>
                 {this.state.showSelectionButtons && this.getSelectedDocOptions()}
@@ -207,7 +211,7 @@ export class ModalCompareDocs extends React.Component {
                 }
               </Modal.Body>
               <Modal.Footer>
-                <Button onClick={this.close}>Close</Button>
+                <Button onClick={this.close}>{this.props.labels.close}</Button>
               </Modal.Footer>
             </Modal>
           </div>

@@ -16,6 +16,7 @@ export class Header extends React.Component {
   handleLanguageChange = (event) => {
     if (event.target.id) {
       this.props.changeHandler(event.target.id);
+      event.preventDefault();
     }
   };
 
@@ -48,8 +49,8 @@ export class Header extends React.Component {
                   <NavItem eventKey={5}>{<FontAwesome className="App-header-ico"  name="question-circle"/>}{this.props.labels.help}</NavItem>
                 </LinkContainer>
                 <NavDropdown eventKey={6} title={<Flag code={this.props.language}/>} id="basic-nav-dropdown">
-                  <MenuItem eventKey={6.1} onClick={this.handleLanguageChange}><Flag code="en"/></MenuItem>
-                  <MenuItem eventKey={6.2}  onClick={this.handleLanguageChange}><Flag code="el"/></MenuItem>
+                  <MenuItem eventKey={6.1} id="en" onClick={this.handleLanguageChange}><Flag code="en"/></MenuItem>
+                  <MenuItem eventKey={6.2} id="el" onClick={this.handleLanguageChange}><Flag code="el"/></MenuItem>
                 </NavDropdown>
                 <NavDropdown eventKey={7} title={<FontAwesome name="user-o"/>} id="basic-nav-dropdown">
                   {! auth.isAuthenticated() ?

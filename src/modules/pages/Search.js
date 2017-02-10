@@ -60,9 +60,9 @@ export class Search extends React.Component {
       ,
       showSearchForm: true
       ,
-      filterMessage: "You can use the box below to filter the results."
+      filterMessage: this.props.labels.search.msg5
       ,
-      selectMessage: "To view docs with the same topic and key, click the radio button of the row you are interested in."
+      selectMessage: this.props.labels.search.msg6
       ,
       searchFormType: "simple"
       ,
@@ -126,7 +126,7 @@ export class Search extends React.Component {
 
   componentWillMount = () => {
     this.setState({
-          message: "Important messages will appear here..."
+          message: this.props.labels.search.msg1
           , messageIcon: this.messageIcons.info
           , docPropMessage: this.state.docPropMessageByValue
         }
@@ -276,24 +276,22 @@ export class Search extends React.Component {
    getSearchAccordion() {
          return (
              <PanelGroup defaultActiveKey="1" accordion>
-               <Panel  header="Simple Search" eventKey="1">
+               <Panel  className="App-search-panel" header={this.props.labels.search.simple} eventKey="1">
                  <SearchOptionsSimple
                      valueTitle=""
-                     placeholder="enter a word or phrase and press the search icon..."
+                     placeholder={this.props.labels.compSimpleSearch.prompt}
                      handleSubmit={this.handleSimpleSearchSubmit}
                  />
                </Panel>
-               <Panel header="Advanced Search" eventKey="2">
+               <Panel className="App-search-panel" header={this.props.labels.search.advanced} eventKey="2">
                  {this.state.dropdowns ?
                      <SearchOptionsAdvanced
                          docTypes={this.state.docTypes}
                          dropDowns={this.state.dropdowns}
                          properties={this.state.propertyTypes}
-                         propertyTitle="and property:"
                          matchers={this.state.matcherTypes}
-                         matcherTitle=""
-                         valueTitle=""
                          handleSubmit={this.handleAdvancedSearchSubmit}
+                         labels={this.props.labels.search}
                      />
                      : "Loading dropdowns for advanced search..."}
                </Panel>
@@ -309,11 +307,9 @@ export class Search extends React.Component {
                  docTypes={this.state.docTypes}
                  dropDowns={this.state.dropdowns}
                  properties={this.state.propertyTypes}
-                 propertyTitle="and property:"
                  matchers={this.state.matcherTypes}
-                 matcherTitle=""
-                 valueTitle=""
                  handleSubmit={this.handleAdvancedSearchSubmit}
+                 labels={this.props.labels.search}
              />
          );
        }
@@ -350,7 +346,6 @@ export class Search extends React.Component {
   }
 
   handleExpandRequest() {
-    console.log(this.state.selectedIdParts);
     if (this.state.selectedIdParts) {
       this.setState({
             domain: "*"
@@ -388,7 +383,6 @@ export class Search extends React.Component {
   }
 
   handleIdQuerySelection(value) {
-    console.log(value);
     this.setState({
           domain: "*"
           , selectedBook: "*"
@@ -460,7 +454,6 @@ export class Search extends React.Component {
 //    }, this.showSelectionButtons(row["doc.id"]));
 
   showRowComparison = (id) => {
-    console.log(id);
     this.setState({
       showModalCompareDocs: true
       , selectedID: id
@@ -481,6 +474,7 @@ export class Search extends React.Component {
             docType={this.state.docType}
             selectedIdParts={this.state.selectedIdParts}
             onClose={this.handleCloseDocComparison}
+            labels={this.props.labels.search}
         />
     )
   }
@@ -528,7 +522,7 @@ export class Search extends React.Component {
   }
 
   fetchData(event) {
-    this.setState({message: "Searching...", messageIcon: this.messageIcons.info});
+    this.setState({message: this.props.labels.search.msg2, messageIcon: this.messageIcons.info});
     let config = {
       auth: {
         username: auth.getUsername()
@@ -554,7 +548,12 @@ export class Search extends React.Component {
           );
           let message = "No docs found...";
           if (response.data.valueCount && response.data.valueCount > 0) {
-            message = "Found " + response.data.valueCount + " docs."
+            message = this.props.labels.search.msg3
+                + " "
+                + response.data.valueCount
+                + " "
+                + this.props.labels.search.msg4
+                + "."
           }
           this.setState({
                 message: message
@@ -601,7 +600,7 @@ export class Search extends React.Component {
   render() {
     return (
         <div className="App-page App-search">
-          <h3>Search the Database</h3>
+          <h3>{this.props.labels.search.pageTitle}</h3>
           <div className="App-search-form">
             <div className="row">
               <div className="col-sm-12 col-md-12 col-lg-12">
@@ -610,7 +609,7 @@ export class Search extends React.Component {
             </div>
           </div>
 
-          <div>Search Result: <span className="App-message"><FontAwesome
+          <div>{this.props.labels.search.resultLabel}: <span className="App-message"><FontAwesome
               name={this.state.messageIcon}/>{this.state.message}</span>
           </div>
           {this.state.showSearchResults &&
@@ -628,7 +627,7 @@ export class Search extends React.Component {
                   data={this.state.data.values}
                   trClassName={"App-data-tr"}
                   search
-                  searchPlaceholder='type here to filter search results...'
+                  searchPlaceholder={this.props.labels.compTable.filterPrompt}
                   striped
                   hover
                   pagination
@@ -644,19 +643,19 @@ export class Search extends React.Component {
                 <TableHeaderColumn
                     dataField='doc.domain'
                     dataSort={ true }
-                    width={this.state.idColumnSize}>Domain</TableHeaderColumn>
+                    width={this.state.idColumnSize}>{this.props.labels.compTable.headerDomain}</TableHeaderColumn>
                 <TableHeaderColumn
                     dataField='doc.topic'
                     dataSort={ true }
-                    width={this.state.idColumnSize}>Topic</TableHeaderColumn>
+                    width={this.state.idColumnSize}>{this.props.labels.compTable.headerTopic}</TableHeaderColumn>
                 <TableHeaderColumn
                     dataField='doc.key'
                     dataSort={ true }
-                    width={this.state.idColumnSize}>Key</TableHeaderColumn>
+                    width={this.state.idColumnSize}>{this.props.labels.compTable.headerKey}</TableHeaderColumn>
                 <TableHeaderColumn
                     dataField='doc.value'
                     dataSort={ true }
-                    >Value</TableHeaderColumn>
+                    >{this.props.labels.compTable.headerValue}</TableHeaderColumn>
               </BootstrapTable>
             </div>
           </div>

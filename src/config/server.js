@@ -6,7 +6,7 @@ const adminApi = "/admin/api/v1/";
 const dbApi = "/db/api/v1/";
 const user = "/user/";
 const useRemoteNet = false;
-const useRemoteOrg = true;
+const useRemoteOrg = false;
 
 var getDbServer = () => {
   if (document.location.hostname === "localhost" || document.location.hostname.endsWith("c9users.io")) {

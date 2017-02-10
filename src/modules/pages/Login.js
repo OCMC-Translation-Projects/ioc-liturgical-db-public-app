@@ -48,7 +48,7 @@ export class Login extends React.Component {
         var formData = {username: this.props.username, password: this.props.password};
         return (
             <div className="App-login">
-              <h3>Please login to view the requested page:</h3>
+              <h3>{this.props.labels.pageLogin.prompt}</h3>
               <Form schema={this.state.schema.schema}
                     uiSchema={this.state.schema.uiSchema}
                     formData={formData}
