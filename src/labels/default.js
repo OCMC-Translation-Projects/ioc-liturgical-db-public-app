@@ -289,8 +289,8 @@ module.exports = {
         , secDocSimpleSearchP06: "Επίσης, σημειώστε ότι η απλή αναζήτηση ψάχνει μόνο έγγραφα που είναι Λειτουργικά. Δεν κάνει αναζήτηση στα Βιβλικά έγγραφα."
         , secSimpleSearch: "Απλή αναζήτηση"
         , secSearchResults: "Αποτέλεσμα Αναζήτησης"
-        , secDocVersionComparisonTitle: "Comparing Versions"
-        , secDocVersionComparisonP01: "The search results show each doc as a separate row.  What if you want to compare versions, using the same topic and key?  Note that the first column of each row has a radio button.  If you click the radio button of the row you want to compare, a popup window appears and shows all the versions that have the same topic and key for the row you selected."
+        , secDocVersionComparisonTitle: "Συγκρίνοντας Εκδόσεις"
+        , secDocVersionComparisonP01: "  Τα αποτελέσματα της αναζήτησης εμφανίζουν κάθε έγγραφο σε ξεχωριστή σειρά. Τι γίνεται αν θέλετε να συγκρίνετε εκδόσεις, χρησιμοποιώντας το ίδιο θέμα και κλειδί; Σημειώστε ότι η πρώτη στήλη κάθε σειράς έχει ένα κουμπί επιλογής. Εάν πληκτρολογήσετε το κουμπί επιλογής της γραμμής που θέλετε να συγκρίνετε, εμφανίζεται ένα αναδυόμενο παράθυρο και δείχνει όλες τις εκδόσεις που έχουν το ίδιο θέμα και κλειδί για τη γραμμή που έχετε επιλέξει."
       }
       , search: {
         advanced: "Προχωρημένη αναζήτηση"

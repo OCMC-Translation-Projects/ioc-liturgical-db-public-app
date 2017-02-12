@@ -5,7 +5,7 @@ export default React.createClass({
   render() {
     // because of the way the install bash script works
     // the last number needs to be 9 or less
-    const version = "1.4.2";
+    const version = "1.4.3";
     return <div className="App-page App-page-about">
       <h2>{this.props.labels.pageAbout.pageTitle}</h2>
       <div className="jumbotron">

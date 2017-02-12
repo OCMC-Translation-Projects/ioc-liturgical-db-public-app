@@ -1,6 +1,6 @@
 {
   "name": "ioc-tms-app",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "private": true,
   "devDependencies": {
     "react-scripts": "0.8.4"
