@@ -1,11 +1,12 @@
 import React from 'react'
 import server from '../../config/server';
+import Email from "../components/images/SsEmailContact"
 
 export default React.createClass({
   render() {
     // because of the way the install bash script works
     // the last number needs to be 9 or less
-    const version = "1.4.3";
+    const version = "1.4.9";
     return <div className="App-page App-page-about">
       <h2>{this.props.labels.pageAbout.pageTitle}</h2>
       <div className="jumbotron">
@@ -34,6 +35,18 @@ export default React.createClass({
           {this.props.labels.pageAbout.para04s3}
         </p>
       </div>
+      <h2>{this.props.labels.pageAbout.acknowledgements}</h2>
+      <div className="jumbotron">
+        <p>{this.props.labels.pageAbout.ackPara01s1} <a href="http://www.agesinitiatives.com/dcs/public/dcs/about.html" target="_blank">{this.props.labels.pageAbout.ackPara01s2}</a> {this.props.labels.pageAbout.ackPara01s3}</p>
+        <p/>
+        <p>{this.props.labels.pageAbout.ackPara02s1} <a href="http://ccat.sas.upenn.edu/gopher/text/religion/biblical/lxxmorph/" target="_blank">{this.props.labels.pageAbout.website}</a>.</p>
+        <p/>
+        <p>{this.props.labels.pageAbout.ackPara03s1} <a href="http://ebible.org/find/show.php?id=eng-webbe" target="_blank">{this.props.labels.pageAbout.website}</a>.</p>
+        <p/>
+        <p>{this.props.labels.pageAbout.ackPara04s1} <a href="http://ebible.org/eng-lxx2012/" target="_blank">{this.props.labels.pageAbout.website}</a>.</p>
+      </div>
+      {this.props.labels.pageAbout.contact} <Email />
+      <p/>
       <p>{this.props.labels.pageAbout.appVersion} {version}.</p>
       <p>{this.props.labels.pageAbout.DbServer} {server.getDbServerPath()}</p>
       <p>{this.props.labels.pageAbout.RestServer} {server.getWsServerPath()}</p>

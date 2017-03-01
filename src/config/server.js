@@ -36,7 +36,6 @@ var getWsServer = () => {
 
 module.exports = {
   isReadOnly: () => {
-    console.log(document.location.hostname);
     return document.location.hostname.endsWith("org") || document.location.hostname === "localhost" || document.location.hostname.endsWith("c9users.io");
   },
   getDbUserAuthPath: () => {

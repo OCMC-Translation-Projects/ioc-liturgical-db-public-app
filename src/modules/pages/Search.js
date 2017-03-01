@@ -68,6 +68,8 @@ export class Search extends React.Component {
       ,
       showSearchResults: false
       ,
+      resultCount: 0
+      ,
       data: {values: [{"doc.id": "", "doc.value:": ""}]}
       ,
       options: {
@@ -101,6 +103,8 @@ export class Search extends React.Component {
       showIdPartSelector: false
       , showModalCompareDocs: false
       , idColumnSize: "80px"
+      , message: this.props.labels.search.msg1
+      , messageIcon: this.messageIcons.info
     };
     this.handleIdQuerySelection = this.handleIdQuerySelection.bind(this);
     this.fetchData = this.fetchData.bind(this);
@@ -546,17 +550,25 @@ export class Search extends React.Component {
                 data: response.data
               }
           );
+          let resultCount = 0;
           let message = "No docs found...";
           if (response.data.valueCount && response.data.valueCount > 0) {
+            resultCount = response.data.valueCount;
             message = this.props.labels.search.msg3
                 + " "
                 + response.data.valueCount
                 + " "
                 + this.props.labels.search.msg4
                 + "."
+          } else {
+            message = this.props.labels.search.msg3
+                + " 0 "
+                + this.props.labels.search.msg4
+                + "."
           }
           this.setState({
                 message: message
+                , resultCount: resultCount
                 , messageIcon: this.messageIcons.info
                 , showSearchResults: true
               }
@@ -610,12 +622,11 @@ export class Search extends React.Component {
           </div>
 
           <div>{this.props.labels.search.resultLabel}: <span className="App-message"><FontAwesome
-              name={this.state.messageIcon}/>{this.state.message}</span>
+              name={this.state.messageIcon}/>{this.props.labels.search.msg3} {this.state.resultCount} {this.props.labels.search.msg4} </span>
           </div>
           {this.state.showSearchResults &&
               <div>
-                {this.state.filterMessage}
-                {this.state.selectMessage}
+                {this.props.labels.search.msg5} {this.props.labels.search.msg6}
               </div>
           }
           {this.state.showSelectionButtons && this.getSelectedDocOptions()}

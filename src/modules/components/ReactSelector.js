@@ -13,8 +13,10 @@ export class ReactSelector extends React.Component {
   }
 
   handleChange = (selection) => {
-    this.props.changeHandler(selection, true);
-    this.setState({ value: selection });
+    this.setState(
+        { value: selection }
+    ,this.props.changeHandler(selection, true)
+    );
   };
 
   render () {
@@ -23,7 +25,7 @@ export class ReactSelector extends React.Component {
           <div className="resourceSelectorPrompt">{this.props.title}</div>
           <Select
               name="form-field-name"
-              value={this.state.value}
+              value={this.props.initialValue}
               options={this.props.resources}
               onChange={this.handleChange}
           />

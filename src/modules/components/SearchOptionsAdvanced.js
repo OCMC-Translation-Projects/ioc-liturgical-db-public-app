@@ -2,6 +2,13 @@ import React, { Component , PropTypes} from 'react';
 import ResourceSelector from './ReactSelector'
 import FontAwesome from 'react-fontawesome';
 
+/**
+ * To future maintainers of this code.
+ * Two months ago, I had never coded using React Js.
+ * The code I have written without a doubt needs to be
+ * examined carefully if you are skilled in React JS.
+ * Michael Colburn, March 1, 2017
+ */
 class SearchOptions extends Component {
 
   constructor(props) {
@@ -19,21 +26,21 @@ class SearchOptions extends Component {
         show: false
         , msg: this.props.labels.domainIs
         , source: []
-        , initialState: "*"
+        , initialValue: "*"
       }
       ,
       dropDownBooks: {
-        show: false
-        , msg: "and selected Book is:"
+        show: true
+        , msg: this.props.labels.bookIs
         , source: []
-        , initialState: "*"
+        , initialValue: "*"
       }
       ,
       dropDownChapters: {
         show: false
         , msg: ""
+        , initialValue: "*"
         , source: []
-        , initialState: "*"
       }
     };
     this.handleDocTypeChange = this.handleDocTypeChange.bind(this);
@@ -50,7 +57,10 @@ class SearchOptions extends Component {
     this.setGenericBookDropdown = this.setGenericBookDropdown.bind(this);
     this.setGenericChaptersDropdown = this.setGenericChaptersDropdown.bind(this);
     this.suggestedQuery = this.suggestedQuery.bind(this);
-
+    this.getDropdownChapterTitle = this.getDropdownChapterTitle.bind(this);
+    this.getDropdownSectionTitle = this.getDropdownSectionTitle.bind(this);
+    this.resetDropDownBooksState = this.resetDropDownBooksState.bind(this);
+    this.cascadeDocTypeChange = this.cascadeDocTypeChange.bind(this);
   }
 
   componentWillMount = () => {
@@ -83,17 +93,35 @@ class SearchOptions extends Component {
     )
   }
 
+  resetDropDownBooksState() {
+    this.setState({
+      selectedBook: "*"
+      , dropDownBooks: {
+        show: this.state.docType !== "Any"
+        , msg: this.props.labels.bookIs
+        , source: []
+        , initialValue: "*"
+      }
+    });
+  }
 
   handleDocTypeChange = (selection) => {
       this.setState({
         docType: selection["value"]
         , suggestedQuery: this.suggestedQuery(selection["value"])
+        , domain: "*"
         , selectedBook: "*"
-      });
-      this.setDomainDropdown(selection["value"]);
+        , selectedChapter: "*"
+      }, this.cascadeDocTypeChange(selection["value"]));
 //      this.setGenericBookDropdown(selection["value"]);
 //      this.setGenericChaptersDropdown(selection["value"]);
   };
+
+  cascadeDocTypeChange(selection) {
+      this.setDomainDropdown(selection);
+      this.setGenericBookDropdown(selection);
+      this.setGenericChaptersDropdown(selection);
+  }
 
   handlePropertyChange = (item) => {
     this.setState({property: item.value});
@@ -121,21 +149,25 @@ class SearchOptions extends Component {
   }
 
   handleDomainChange = (selection) => {
-    this.setState({domain: selection["value"]});
-    this.setBookDropdown(selection["value"]);
+    this.setState({domain: selection["value"]}, this.setBookDropdown(selection["value"]));
   };
 
   handleBookChange = (selection) => {
     this.setState({
       selectedBook: selection["value"]
-    });
-    this.setChaptersDropdown(selection["value"]);
+    }, this.setChaptersDropdown(selection["value"]));
   };
 
 
   handleChapterChange = (selection) => {
     this.setState({
       selectedChapter: selection["value"]
+      , dropDownChapters: {
+          show: this.state.dropDownChapters.show
+          , msg: this.state.dropDownChapters.msg
+          , source: this.state.dropDownChapters.source
+          , initialValue: selection["value"]
+      }
     });
   }
 
@@ -144,6 +176,9 @@ class SearchOptions extends Component {
     let msg = "";
     let show = false;
     let source = {};
+    let showBooks = false;
+    let bookMsg = "";
+    let bookSource = [];
     switch (docType) {
       case "All": {
         show = false;
@@ -162,6 +197,9 @@ class SearchOptions extends Component {
         show = true;
         if (this.state.dropdowns.loaded) {
           source = this.state.dropdowns.Liturgical.domains;
+          showBooks = true;
+          bookMsg = this.props.labels.bookIs;
+          bookSource = this.state.dropdowns.Liturgical["all"].books;
         }
         break;
       }
@@ -175,43 +213,53 @@ class SearchOptions extends Component {
         show: show
         , msg: msg
         , source: source
+        , initialValue: "*"
       },
       dropDownBooks: {
-        show: false
-        , msg: ""
-        , source: []
+        show: showBooks
+        , msg: bookMsg
+        , source: bookSource
+        , initialValue: "*"
       },
       dropDownChapters: {
         show: false
         , msg: ""
         , source: []
+        , initialValue: "*"
       }
     });
   }
 
 
   setGenericBookDropdown(type) {
-    let msg = "and selectedBook is:";
-    let show = false;
-    let source = {};
-    if (type === "Biblical") {
-      show = true;
-      source = this.props.dropdowns.Biblical.all.books;
-    } else if (type === "Liturgical") {
-      show = true;
-      source = this.props.dropdowns.Liturgical.all.books;
-    } // end of if
-    this.setState({
-      dropDownBooks: {
-        show: show
-        , msg: msg
-        , source: source
+    try {
+      let msg = this.props.labels.bookIs;
+      let show = false;
+      let source = {};
+      if (this.props.dropDowns) {
+        if (type === "Biblical" && this.state.dropdowns.Biblical) {
+          show = true;
+          source = this.state.dropdowns.Biblical.all.books;
+        } else if (type === "Liturgical" && this.state.dropdowns.Liturgical) {
+          show = true;
+          source = this.state.dropdowns.Liturgical.all.books;
+        } // end of if
       }
-    });
+      this.setState({
+        dropDownBooks: {
+          show: show
+          , msg: msg
+          , source: source
+          , initialValue: "*"
+        }
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
   } // end of method
 
   setBookDropdown(domain) {
-    let msg = "and selectedBook is:";
+    let msg = this.props.labels.bookIs;
     let show = false;
     let source = {};
     if (this.state.docType === "Biblical") {
@@ -219,7 +267,8 @@ class SearchOptions extends Component {
       source = this.state.dropdowns.Biblical.topics[domain];
     } else if (this.state.docType === "Liturgical") {
       show = true;
-      source = this.state.dropdowns.Liturgical.topics[domain];
+      source = this.state.dropdowns.Liturgical["all"].books;
+//      source = this.state.dropdowns.Liturgical.topics[domain];
     } // end of if
     this.setState({
       dropDownBooks: {
@@ -236,33 +285,32 @@ class SearchOptions extends Component {
     let source = {};
     if (this.state.docType === "Biblical") {
       if (this.state.domain === "*") {
-        msg = "Select Chapter...";
+        msg = this.props.labels.chapterIs;
         show = true;
         source = this.state.dropdowns.Biblical.all.chapters;
       } else {
-        msg = "Select Chapter...";
+        msg = this.props.labels.chapterIs;
         show = true;
         source = this.state.dropdowns.Biblical.topics[this.state.domain + '.' + book];
       }
     } else if (this.state.docType === "Liturgical") {
-      switch (book) {
-        case "me":
-          msg = "Select month...";
-          show = true;
           if (this.state.dropdowns.loaded) {
-            source = this.state.dropdowns.Liturgical.topics[this.state.domain + "." + book];
-          } else {
-            source = this.state.daysOfMonth;
+            if (this.state.domain === "*") {
+              source = this.state.dropdowns.Liturgical.topics["gr_gr_cog." + book]
+              show = (source !== undefined);
+            } else {
+              source = this.state.dropdowns.Liturgical.topics[this.state.domain + "." + book]
+              show = (source !== undefined);
+            }
           }
-          break;
-        default:
-      }
     } // end of if
     this.setState({
-      dropDownChapters: {
+      selectedChapter: "*"
+      , dropDownChapters: {
         show: show
         , msg: msg
         , source: source
+        , initialValue: "*"
       }
     });
   } // end of method
@@ -295,6 +343,73 @@ class SearchOptions extends Component {
       return "Enter a word or phrase from the Liturgical texts or the Bible, even Greek...";
     }
   }
+  getDropdownChapterTitle() {
+    let msg = "";
+    if (this.state.docType === "Biblical") {
+      if (this.state.domain === "*") {
+        msg = this.props.labels.chapterIs;
+      } else {
+        msg = this.props.labels.chapterIs;
+      }
+    } else if (this.state.docType === "Liturgical") {
+      switch (this.state.selectedBook) {
+        case "da":
+          msg = this.props.labels.dayIs;
+          break;
+        case "eo":
+          msg = this.props.labels.weekIs;
+          break;
+        case "eu":
+          msg = this.props.labels.serviceIs;
+          break;
+        case "he":
+          msg = this.props.labels.typeIs;
+          break;
+        case "hi":
+          msg = this.props.labels.sectionIs;
+          break;
+        case "ho":
+          msg = this.props.labels.sectionIs;
+          break;
+        case "oc":
+          msg = this.props.labels.modeIs;
+          break;
+        case "me":
+          msg = this.props.labels.monthIs;
+          break;
+        case "pe":
+          msg = this.props.labels.dayIs;
+          break;
+        case "tr":
+          msg = this.props.labels.dayIs;
+          break;
+        default:
+          msg = this.props.labels.chapterIs;
+      }
+    } // end of if
+    return msg;
+  }
+
+  getDropdownSectionTitle() {
+    let msg = "";
+    if (this.state.docType === "Biblical") {
+    } else if (this.state.docType === "Liturgical") {
+      switch (this.state.selectedBook) {
+        case "he":
+          msg = this.props.labels.modeIs;
+          break;
+        case "oc":
+          msg = this.props.labels.dayIs;
+          break;
+        case "me":
+          msg = this.props.labels.monthIs;
+          break;
+        default:
+          msg = "undefined subsection";
+      }
+    } // end of if
+    return msg;
+  }
 
   render() {
     return (
@@ -315,7 +430,7 @@ class SearchOptions extends Component {
               <div className="col-sm-12 col-md-12 col-lg-12">
                 <ResourceSelector
                     title={this.props.labels.domainIs}
-                    initialValue="*"
+                    initialValue={this.state.domain}
                     resources={this.state.dropDownDomains.source}
                     changeHandler={this.handleDomainChange}
                 />
@@ -326,8 +441,8 @@ class SearchOptions extends Component {
             <div className="row">
               <div className="col-sm-12 col-md-12 col-lg-12">
                 <ResourceSelector
-                    title={this.state.dropDownBooks.msg}
-                    initialValue={"*"}
+                    title={this.props.labels.bookIs}
+                    initialValue={this.state.selectedBook}
                     resources={this.state.dropDownBooks.source}
                     changeHandler={this.handleBookChange}
                 />
@@ -338,8 +453,8 @@ class SearchOptions extends Component {
             <div className="row">
               <div className="col-sm-12 col-md-12 col-lg-12">
                 <ResourceSelector
-                    title={this.state.dropDownChapters.msg}
-                    initialValue={"*"}
+                    title={this.getDropdownChapterTitle()}
+                    initialValue={this.state.selectedChapter}
                     resources={this.state.dropDownChapters.source}
                     changeHandler={this.handleChapterChange}
                 />

@@ -1,8 +1,8 @@
 {
   "main.css": "static/css/main.3857bd56.css",
   "main.css.map": "static/css/main.3857bd56.css.map",
-  "main.js": "static/js/main.819aff7a.js",
-  "main.js.map": "static/js/main.819aff7a.js.map",
+  "main.js": "static/js/main.71991d6b.js",
+  "main.js.map": "static/js/main.71991d6b.js.map",
   "static/media/ScreenShotAvancedSearchInitial.png": "static/media/ScreenShotAvancedSearchInitial.d3c6b08b.png",
   "static/media/ScreenShotBiblicalOptions.png": "static/media/ScreenShotBiblicalOptions.cc41174a.png",
   "static/media/ScreenShotLiturgicalOptions.png": "static/media/ScreenShotLiturgicalOptions.76f40814.png",
@@ -13,6 +13,7 @@
   "static/media/ScreenShotShowingRows.png": "static/media/ScreenShotShowingRows.67863691.png",
   "static/media/ScreenShotVersionCompareEng.png": "static/media/ScreenShotVersionCompareEng.f5c047f0.png",
   "static/media/el.ico": "static/media/el.8bfb13cb.ico",
+  "static/media/emailDbOrg.png": "static/media/emailDbOrg.bff5a4c4.png",
   "static/media/en.ico": "static/media/en.8b5e02f5.ico",
   "static/media/me.m01.d06.meVE.Apolytikion1.text.png": "static/media/me.m01.d06.meVE.Apolytikion1.text.ccf6e6db.png",
   "static/media/ocmc-globe-3.png": "static/media/ocmc-globe-3.d7316685.png"
