@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import server from '../../config/server';
 import SearchOptionsAdvanced from "../components/SearchOptionsAdvanced";
 import SearchOptionsSimple from "../components/SearchOptionsSimple";
 import ModalCompareDocs from '../components/ModalCompareDocs';
 import FontAwesome from 'react-fontawesome';
-import {Panel, PanelGroup} from 'react-bootstrap';
+import {Alert, Glyphicon, Panel, PanelGroup} from 'react-bootstrap';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import auth from '../components/Auth';
 
@@ -15,12 +16,6 @@ export class Search extends React.Component {
     super(props);
     this.state = {
       docType: "Liturgical",
-      docTypes: [
-        {label: "All", value: "all"}
-        , {label: "Biblical", value: "Biblical"}
-        , {label: "Liturgical", value: "Liturgical"}
-      ]
-      ,
       domain: "*"
       ,
       selectedBook: "*"
@@ -30,13 +25,6 @@ export class Search extends React.Component {
       query: ""
       ,
       matcher: "c"
-      ,
-      matcherTypes: [
-        {label: "contains", value: "c"}
-        , {label: "starts with", value: "sw"}
-        , {label: "ends with", value: "ew"}
-        , {label: "matches regular expression", value: "rx"}
-      ]
       ,
       suggestedQuery: ""
       ,
@@ -126,6 +114,8 @@ export class Search extends React.Component {
     this.getDocComparison = this.getDocComparison.bind(this);
     this.handleCloseDocComparison = this.handleCloseDocComparison.bind(this);
     this.getBars = this.getBars.bind(this);
+    this.getDocTypeOptions = this.getDocTypeOptions.bind(this);
+    this.getMatcherOptions = this.getMatcherOptions.bind(this);
   }
 
   componentWillMount = () => {
@@ -206,6 +196,26 @@ export class Search extends React.Component {
       , searchFormToggle: searchFormToggleIcon
       , searchFormToggleMessage: searchFormToggleMessage
   });
+  }
+
+  getDocTypeOptions () {
+    return (
+        [
+            {label: this.props.labels.search.docTypeAny, value: "all"}
+            , {label: this.props.labels.search.docTypeBiblical, value: "Biblical"}
+            , {label: this.props.labels.search.docTypeLiturgical, value: "Liturgical"}
+        ]
+    )
+  }
+  getMatcherOptions () {
+    return (
+        [
+            {label: this.props.labels.search.matchesAnywhere, value: "c"}
+            , {label: this.props.labels.search.matchesAtTheStart, value: "sw"}
+            , {label: this.props.labels.search.matchesAtTheEnd, value: "ew"}
+            , {label: this.props.labels.search.matchesRegEx, value: "rx"}
+        ]
+    );
   }
   searchFormOptionIcons() {
     return (
@@ -290,10 +300,10 @@ export class Search extends React.Component {
                <Panel className="App-search-panel" header={this.props.labels.search.advanced} eventKey="2">
                  {this.state.dropdowns ?
                      <SearchOptionsAdvanced
-                         docTypes={this.state.docTypes}
+                         docTypes={this.getDocTypeOptions()}
                          dropDowns={this.state.dropdowns}
                          properties={this.state.propertyTypes}
-                         matchers={this.state.matcherTypes}
+                         matchers={this.getMatcherOptions()}
                          handleSubmit={this.handleAdvancedSearchSubmit}
                          labels={this.props.labels.search}
                      />
@@ -671,6 +681,8 @@ export class Search extends React.Component {
             </div>
           </div>
           }
+          <Alert bsStyle="info"><Glyphicon glyph="bullhorn" /> If you want to work with us to add your language to the user interface, or the translation of the liturgical texts in your language, please contact us. We are especially looking for volunteers to translate the user interface for this website into: Arabic, Chinese, French, Spanish, and Swahili. Also, we are looking for volunteers to enter officially approved Arabic, Chinese, French, Spanish, and Swahili translations of the liturgical texts. See how to contact us by looking at the bottom of the About page.</Alert>
+          <Alert bsStyle="warning"><Glyphicon glyph="warning-sign" /> From time to time, we need to update the web app or the database. If you suddenly see messages about network errors or something not being available, wait a few minutes and try again.</Alert>
         </div>
     )
   }

@@ -467,18 +467,12 @@ class SearchOptions extends Component {
             <div className="col-sm-12">
               <ResourceSelector
                   title={this.props.labels.propertyIs}
-                  initialValue=""
+                  initialValue={this.state.property}
                   resources={this.props.properties}
                   changeHandler={this.handlePropertyChange}
               />
-              <ResourceSelector
-                  title={this.props.matcherTitle}
-                  initialValue=""
-                  resources={this.props.matchers}
-                  changeHandler={this.handleMatcherChange}
-              />
               <form onSubmit={this.handleSubmit}>
-                <div className="control-label"></div>
+                <div className="control-label">{this.props.labels.propertyTextIs}</div>
               <input
                   type="text"
                   onChange={this.handleValueChange}
@@ -491,6 +485,12 @@ class SearchOptions extends Component {
                         name={"search"}/>
                 </span>
               </form>
+              <ResourceSelector
+                  title={this.props.labels.matcherIs}
+                  initialValue={this.state.matcher}
+                  resources={this.props.matchers}
+                  changeHandler={this.handleMatcherChange}
+              />
             </div>
           </div>
         </div>
