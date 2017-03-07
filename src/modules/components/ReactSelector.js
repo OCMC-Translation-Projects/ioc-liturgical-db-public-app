@@ -7,6 +7,7 @@ export class ReactSelector extends React.Component {
 
   constructor(props) {
     super(props);
+    console.log(this.props.resources)
     this.state = {
       value: this.props.initialValue
     };

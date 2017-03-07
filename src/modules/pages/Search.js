@@ -202,8 +202,8 @@ export class Search extends React.Component {
     return (
         [
             {label: this.props.labels.search.docTypeAny, value: "all"}
-            , {label: this.props.labels.search.docTypeBiblical, value: "Biblical"}
-            , {label: this.props.labels.search.docTypeLiturgical, value: "Liturgical"}
+            , {label: this.props.labels.search.biblical, value: "Biblical"}
+            , {label: this.props.labels.search.liturgical, value: "Liturgical"}
         ]
     )
   }
@@ -313,12 +313,12 @@ export class Search extends React.Component {
          );
    }
 
-   getSearchForm(type) {
+  getSearchForm(type) {
      switch(type) {
        case (this.searchFormTypes.advanced): {
          return (
              <SearchOptionsAdvanced
-                 docTypes={this.state.docTypes}
+                 docTypes={this.getDocTypeOptions()}
                  dropDowns={this.state.dropdowns}
                  properties={this.state.propertyTypes}
                  matchers={this.state.matcherTypes}

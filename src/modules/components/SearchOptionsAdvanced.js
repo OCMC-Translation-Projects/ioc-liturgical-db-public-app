@@ -13,6 +13,7 @@ class SearchOptions extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       docType: "Liturgical"
       , domain: "*"
@@ -158,7 +159,6 @@ class SearchOptions extends Component {
     }, this.setChaptersDropdown(selection["value"]));
   };
 
-
   handleChapterChange = (selection) => {
     this.setState({
       selectedChapter: selection["value"]
@@ -170,7 +170,6 @@ class SearchOptions extends Component {
       }
     });
   }
-
 
   setDomainDropdown = (docType) => {
     let msg = "";
@@ -229,7 +228,6 @@ class SearchOptions extends Component {
       }
     });
   }
-
 
   setGenericBookDropdown(type) {
     try {
@@ -333,7 +331,6 @@ class SearchOptions extends Component {
     });
   } // end of method
 
-
   suggestedQuery(docType) {
     if (docType === "Biblical") {
       return "Enter a word or phrase from the Bible, even Greek...";
@@ -343,6 +340,7 @@ class SearchOptions extends Component {
       return "Enter a word or phrase from the Liturgical texts or the Bible, even Greek...";
     }
   }
+
   getDropdownChapterTitle() {
     let msg = "";
     if (this.state.docType === "Biblical") {
