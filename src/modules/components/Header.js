@@ -39,9 +39,13 @@ export class Header extends React.Component {
                 <LinkContainer to="/search">
                   <NavItem eventKey={2}>{<FontAwesome  className="App-header-ico" name="search"/>}{this.props.labels.search}</NavItem>
                 </LinkContainer>
-                <LinkContainer to="/browser">
-                  <NavItem eventKey={3}>{<FontAwesome  className="App-header-ico" name="database"/>}{this.props.labels.browser}</NavItem>
-                </LinkContainer>
+                {auth.isAuthenticated() ?
+                    <LinkContainer to="/browser">
+                      <NavItem eventKey={3}>{<FontAwesome  className="App-header-ico" name="database"/>}{this.props.labels.browser}</NavItem>
+                    </LinkContainer>
+                    :
+                    ""
+                }
                 <LinkContainer to="/about">
                   <NavItem eventKey={4}>{<FontAwesome className="App-header-ico" name="info-circle"/>}{this.props.labels.about}</NavItem>
                 </LinkContainer>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './components/Header'
-import Labels from '../labels/default';
+import {Labels} from 'ioc-liturgical-react';
 import Logo from './components/images/Logo';
 
 export class App extends React.Component {
@@ -11,17 +11,16 @@ export class App extends React.Component {
       language: {
         language: "en"
         , labels: {
-          compSimpleSearch: Labels.labels.en.compSimpleSearch
-          , compTable: Labels.labels.en.compTable
+          resultsTable: Labels.labels.en.resultsTable
           , header: Labels.labels.en.header
           , help: Labels.labels.en.help
           , pageAbout: Labels.labels.en.pageAbout
           , pageLogin: Labels.labels.en.pageLogin
           , search: Labels.labels.en.search
+          , ldp: Labels.labels.en.ldp
         }
       }
     }
-
     this.handleLanguageChange = this.handleLanguageChange.bind(this);
   };
 
@@ -36,8 +35,7 @@ export class App extends React.Component {
         language: {
           code: code
           , labels: {
-            compSimpleSearch: Labels.labels[code].compSimpleSearch
-            , compTable: Labels.labels[code].compTable
+            resultsTable: Labels.labels[code].resultsTable
             , header: Labels.labels[code].header
             , help: Labels.labels[code].help
             , pageAbout: Labels.labels[code].pageAbout
@@ -62,8 +60,7 @@ export class App extends React.Component {
             <div className="col-sm-12 col-md-12 col-lg-12">
               {this.props.children && React.cloneElement(this.props.children, {
                 labels: {
-                compSimpleSearch: this.state.language.labels.compSimpleSearch
-                , compTable: this.state.language.labels.compTable
+                resultsTable: this.state.language.labels.resultsTable
                 , header: this.state.language.labels.header
                 , help: this.state.language.labels.help
                 , pageAbout: this.state.language.labels.pageAbout

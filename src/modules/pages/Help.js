@@ -30,9 +30,9 @@ export class Help extends React.Component {
             <Accordion>
               <Panel header={this.props.labels.help.secDocIds} eventKey="1">
                 <DocIds
-                    labelDomain={this.props.labels.compTable.headerDomain}
-                    labelTopic={this.props.labels.compTable.headerTopic}
-                    labelKey={this.props.labels.compTable.headerKey}
+                    labelDomain={this.props.labels.resultsTable.headerDomain}
+                    labelTopic={this.props.labels.resultsTable.headerTopic}
+                    labelKey={this.props.labels.resultsTable.headerKey}
                     labels={this.props.labels.help}/>
               </Panel>
               <Panel header={this.props.labels.help.secDocProps} eventKey="2">

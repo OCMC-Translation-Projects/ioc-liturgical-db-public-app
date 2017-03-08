@@ -1,12 +1,13 @@
 import React from 'react'
 import server from '../../config/server';
 import Email from "../components/images/SsEmailContact"
+import {Configuration} from 'ioc-liturgical-react'
 
 export default React.createClass({
   render() {
     // because of the way the install bash script works
     // the last number needs to be 9 or less
-    const version = "1.5.4";
+    const version = "1.5.5";
     return <div className="App-page App-page-about">
       <h2>{this.props.labels.pageAbout.pageTitle}</h2>
       <div className="jumbotron">
@@ -47,9 +48,14 @@ export default React.createClass({
       </div>
       {this.props.labels.pageAbout.contact} <Email />
       <p/>
-      <p>{this.props.labels.pageAbout.appVersion} {version}.</p>
-      <p>{this.props.labels.pageAbout.DbServer} {server.getDbServerPath()}</p>
-      <p>{this.props.labels.pageAbout.RestServer} {server.getWsServerPath()}</p>
+      <Configuration
+          appVersion={version}
+          appVersionLabel={this.props.labels.pageAbout.appVersion}
+          restServer={server.getWsServerPath()}
+          restServerLabel={this.props.labels.pageAbout.RestServer}
+          wsVersionLabel={this.props.labels.pageAbout.wsVersion}
+          dbServerLabel={this.props.labels.pageAbout.DbServer}
+      />
     </div>
   }
 })

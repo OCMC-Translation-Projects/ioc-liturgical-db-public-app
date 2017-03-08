@@ -5,7 +5,7 @@ import auth from './modules/components/Auth'
 import App from './modules/App';
 import About from './modules/pages/About';
 import Help from './modules/pages/Help';
-import Search from './modules/pages/Search';
+import Search from './modules/pages/SearchPage';
 import Browser from './modules/pages/Browser';
 import Login from './modules/pages/Login'
 import Logout from './modules/pages/Logout'

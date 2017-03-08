@@ -1,6 +1,6 @@
 {
   "name": "ioc-liturgical-db-app",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "private": true,
   "license": "EPL-1.0",
   "devDependencies": {
@@ -10,8 +10,9 @@
     "axios": "^0.15.3",
     "bootstrap": "^3.3.7",
     "bootstrap-select": "^1.12.1",
+    "file-loader": "^0.10.0",
     "font-awesome": "^4.7.0",
-    "ioc-liturgical-react": "0.0.1",
+    "ioc-liturgical-react": "0.0.13",
     "neo4j-driver": "^1.0.4",
     "pkginfo": "^0.4.0",
     "react": "^15.4.1",
