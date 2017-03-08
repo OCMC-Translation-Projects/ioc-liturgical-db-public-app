@@ -2,12 +2,11 @@ import React from 'react'
 import server from '../../config/server';
 import Email from "../components/images/SsEmailContact"
 import {Configuration} from 'ioc-liturgical-react'
+import VersionNumbers from "../../config/VersionNumbers";
 
 export default React.createClass({
   render() {
-    // because of the way the install bash script works
-    // the last number needs to be 9 or less
-    const version = "1.5.5";
+    const version = VersionNumbers.getPackageNumber();
     return <div className="App-page App-page-about">
       <h2>{this.props.labels.pageAbout.pageTitle}</h2>
       <div className="jumbotron">
