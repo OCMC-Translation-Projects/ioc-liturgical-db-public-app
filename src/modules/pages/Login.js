@@ -2,60 +2,67 @@
  * Created by mac002 on 12/7/16.
  */
 import React from 'react';
-import axios from 'axios';
 import auth from '../components/Auth'
+import {Login as IocLogin} from 'ioc-liturgical-react'
 import server from '../../config/server';
-import Form from "react-jsonschema-form";
 
 export class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      path:""
-      , schema: {"uiSchema":{"password":{"ui:widget":"password"},"ui:order":["username","password"]},"schema":{"type":"object","properties":{"password":{"type":"string"},"username":{"type":"string"}},"$schema":"http://json-schema.org/draft-04/schema#"},"items":[{"username":"","password":""}]}
-    };
+      username: ""
+      , password: ""
+      ,loginFormMsg: ""
+    }
+    this.onSubmit = this.onSubmit.bind(this);
+    this.setCredentials = this.setCredentials.bind(this);
   }
 
-  onSubmit = ({formData}) => {
-    var config = {
-      auth: {
-        username: formData.username
-        , password: formData.password
+  setCredentials = (status, valid, username, password) => {
+    auth.setCredentials(
+        username
+        , password
+        , valid
+    );
+    if (status === 200) {
+      const { location } = this.props
+      if (location.state && location.state.nextPathname) {
+        this.props.router.replace(location.state.nextPathname)
+      } else {
+        this.props.router.replace('/')
       }
-    };
-    axios.get(server.getDbUserAuthPath() + formData.username, config)
-        .then(response => {
-          auth.setCredentials(
-              formData.username
-              , formData.password
-              , true
-          );
-          const { location } = this.props
-
-          if (location.state && location.state.nextPathname) {
-            this.props.router.replace(location.state.nextPathname)
-          } else {
-            this.props.router.replace('/')
-          }
-
-        })
-        .catch( (error) => {
-          auth.setCredentials(formData.username, formData.password, false, []);
-        });
+    }
   }
+
+  onSubmit = (status, valid, username, password) => {
+    let theStatusMsg = "";
+    if (status !== 200) {
+      theStatusMsg = this.props.labels.pageLogin.bad;
+      this.setState(
+          {
+            username: username
+            , password: password
+            , loginFormMsg: theStatusMsg
+          }
+      );
+    } else {
+      this.setCredentials(status, valid, username,password)
+    }
+  };
 
   render() {
-        var formData = {username: this.props.username, password: this.props.password};
-        return (
-            <div className="App-login">
-              <h3>{this.props.labels.pageLogin.prompt}</h3>
-              <Form schema={this.state.schema.schema}
-                    uiSchema={this.state.schema.uiSchema}
-                    formData={formData}
-                    onSubmit={this.onSubmit}
-              />
-            </div>
-        );
+    return (
+        <div className="App-login">
+          <IocLogin
+              restServer={server.getWsServerPath()}
+              username={this.state.username}
+              password={this.state.password}
+              loginCallback={this.onSubmit}
+              formPrompt={this.props.labels.pageLogin.prompt}
+              formMsg={this.state.loginFormMsg}
+          />
+        </div>
+    );
   }
 }
 

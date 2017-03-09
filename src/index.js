@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, hashHistory } from 'react-router';
+import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 import auth from './modules/components/Auth'
 import App from './modules/App';
 import About from './modules/pages/About';
@@ -39,6 +39,7 @@ function requireAuth(nextState, replace) {
 render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
+      <IndexRoute component={Search}/>
       {server.isReadOnly() ?
           <Route path="/search" component={Search } />
           :
