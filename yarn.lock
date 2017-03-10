@@ -2707,9 +2707,9 @@ invert-kv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
 
-ioc-liturgical-react@0.0.19:
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/ioc-liturgical-react/-/ioc-liturgical-react-0.0.19.tgz#7242c1daa2f6973ff2a6d96474a3d5735720ff8a"
+ioc-liturgical-react@0.0.21:
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/ioc-liturgical-react/-/ioc-liturgical-react-0.0.21.tgz#18d6edf6fa76cc57fbf7e9afabb446a1578d2844"
   dependencies:
     axios "^0.15.3"
     bootstrap "^3.3.7"
@@ -2717,6 +2717,7 @@ ioc-liturgical-react@0.0.19:
     font-awesome "^4.7.0"
     fs-extra "^0.30.0"
     fs-promise "^0.5.0"
+    react "^15.4.2"
     react-bootstrap "0.30.7"
     react-bootstrap-date-picker "4.0.0"
     react-bootstrap-table "2.7.1"
@@ -4482,7 +4483,7 @@ react-dev-utils@^0.4.2:
   version "15.3.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.3.2.tgz#c46b0aa5380d7b838e7a59c4a7beff2ed315531f"
 
-react-dom@^15.4.1, react-dom@^15.4.2:
+react-dom@^15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.4.2.tgz#015363f05b0a1fd52ae9efdd3a0060d90695208f"
   dependencies:
@@ -4624,7 +4625,7 @@ react-themeable@^1.1.0:
     envify "^3.0.0"
     fbjs "^0.6.1"
 
-react@^15.4.1:
+react@^15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.4.2.tgz#41f7991b26185392ba9bae96c8889e7e018397ef"
   dependencies:
