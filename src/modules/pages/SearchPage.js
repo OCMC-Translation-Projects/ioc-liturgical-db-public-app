@@ -3,14 +3,14 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import {Alert, Glyphicon} from 'react-bootstrap';
 import auth from '../components/Auth'
 import server from '../../config/server';
-import {Search} from 'ioc-liturgical-react';
+import {SearchText} from 'ioc-liturgical-react';
 
 export class SearchPage extends React.Component {
 
   render() {
     return (
         <div className="App-page App-search">
-          <Search
+          <SearchText
               restServer={server.getWsServerPath()}
               username={auth.getUsername()}
               password={auth.getPassword()}

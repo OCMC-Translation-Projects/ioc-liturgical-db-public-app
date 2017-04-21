@@ -5,7 +5,7 @@
 
 // because of the way the install bash script works
 // the last number needs to be 9 or less
-const packageNumber = "1.6.0";
+const packageNumber = "1.6.1";
 
 module.exports = {
   getPackageNumber: () => { return packageNumber;}
