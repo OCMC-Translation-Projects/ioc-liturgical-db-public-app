@@ -16,6 +16,7 @@ export class Login extends React.Component {
     }
     this.onSubmit = this.onSubmit.bind(this);
     this.setCredentials = this.setCredentials.bind(this);
+    this.dropdownsCallback = this.dropdownsCallback.bind(this);
   }
 
   setCredentials = (status, valid, username, password) => {
@@ -50,6 +51,10 @@ export class Login extends React.Component {
     }
   };
 
+  dropdownsCallback = () => {
+
+  }
+
   render() {
     return (
         <div className="App-login">
@@ -60,6 +65,7 @@ export class Login extends React.Component {
               loginCallback={this.onSubmit}
               formPrompt={this.props.labels.pageLogin.prompt}
               formMsg={this.state.loginFormMsg}
+              dropdownsCallback={this.dropdownsCallback}
           />
         </div>
     );
