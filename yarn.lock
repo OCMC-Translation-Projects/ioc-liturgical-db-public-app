@@ -2738,9 +2738,9 @@ invert-kv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
 
-ioc-liturgical-react@0.0.24:
-  version "0.0.24"
-  resolved "https://registry.yarnpkg.com/ioc-liturgical-react/-/ioc-liturgical-react-0.0.24.tgz#084d69a33405172edfa4bee8698c90c3abdc3411"
+ioc-liturgical-react@0.0.25:
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/ioc-liturgical-react/-/ioc-liturgical-react-0.0.25.tgz#3f759d5cc3df3bdc33c0955369c2ad378199f008"
   dependencies:
     axios "^0.15.3"
     bootstrap "^3.3.7"
@@ -2752,13 +2752,13 @@ ioc-liturgical-react@0.0.24:
     react "^15.4.2"
     react-bootstrap "0.30.7"
     react-bootstrap-date-picker "4.0.0"
-    react-bootstrap-table "3.1.7"
+    react-bootstrap-table "3.4.6"
     react-checkbox-list "0.0.2"
     react-dom "^15.4.2"
     react-file-download "^0.3.2"
     react-fontawesome "^1.5.0 "
     react-google-charts "^1.5.5"
-    react-iframe "^1.0.5"
+    react-iframe "^1.0.7"
     react-jsonschema-form "^0.43.0"
     react-select "^1.0.0-rc.2"
     react-tree-graph "1.5.0"
@@ -4501,16 +4501,9 @@ react-bootstrap-date-picker@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-bootstrap-date-picker/-/react-bootstrap-date-picker-4.0.0.tgz#63b243a571e295e83a11eee56b081f21d1ec4612"
 
-react-bootstrap-table@2.7.1:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-table/-/react-bootstrap-table-2.7.1.tgz#72d0de5f88bd2ccb600d58b649d75c032441115e"
-  dependencies:
-    "@allenfang/react-toastr" "2.8.2"
-    classnames "^2.1.2"
-
-react-bootstrap-table@3.1.7:
-  version "3.1.7"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-table/-/react-bootstrap-table-3.1.7.tgz#99339e9299d5771b675173a33050bfb32592fca7"
+react-bootstrap-table@3.4.6:
+  version "3.4.6"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-table/-/react-bootstrap-table-3.4.6.tgz#0e1e5c7d9bf0f4b854a91fbc640770e7f757d27b"
   dependencies:
     "@allenfang/react-toastr" "2.8.2"
     classnames "^2.1.2"
@@ -4582,7 +4575,7 @@ react-iframe@^0.0.04:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/react-iframe/-/react-iframe-0.0.4.tgz#24f2f63439f1d141788b0971acc10cdd06fd7b75"
 
-react-iframe@^1.0.5:
+react-iframe@^1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/react-iframe/-/react-iframe-1.0.7.tgz#c20fef7ca30e44e1f54922b9f6357c1c49f1d8e9"
   dependencies:
