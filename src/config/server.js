@@ -27,9 +27,11 @@ var getWsServer = () => {
     return document.location.protocol +  "//" + document.location.hostname + ":4567";
   } else {
     if (document.location.hostname.endsWith("net")) {
-      return document.location.protocol +  "//ioc-liturgical-ws.net";
+      return document.location.protocol +  "//ioc-liturgical-db.net";
+//      return document.location.protocol +  "//ioc-liturgical-ws.net";
     } else {
-      return document.location.protocol +  "//ioc-liturgical-ws.org";
+      return document.location.protocol +  "//ioc-liturgical-db.org";
+//      return document.location.protocol +  "//ioc-liturgical-ws.org";
     }
   }
 }
