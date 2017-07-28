@@ -1,6 +1,6 @@
 {
   "name": "ioc-liturgical-db-app",
-  "version": "1.6.6",
+  "version": "1.6.7",
   "private": true,
   "license": "EPL-1.0",
   "devDependencies": {
