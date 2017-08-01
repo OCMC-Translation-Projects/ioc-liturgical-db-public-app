@@ -1,9 +1,11 @@
 import React from 'react'
 import logo from './graphics/ocmc-globe-3.png'
 
-export default React.createClass({
+class Logo extends React.Component {
   render() {
-    return <img className="App-img App-img-logo" role="presentation" src={logo} height="30px" width="110px"/>
+    return <img className="App-img App-img-logo" alt="IOC-TMS Logo" role="presentation" src={logo} height="30px" width="110px"/>
   }
-})
+};
+
+export default Logo;
 

@@ -1,6 +1,7 @@
 /**
  * Created by mac002 on 1/2/17.
  */
+import axios from 'axios';
 
 const adminApi = "/admin/api/v1/";
 const dbApi = "/db/api/v1/";
@@ -36,9 +37,19 @@ var getWsServer = () => {
   }
 }
 
-module.exports = {
+
+export default {
   isReadOnly: () => {
-    return document.location.hostname.endsWith("org") || document.location.hostname === "localhost" || document.location.hostname.endsWith("c9users.io");
+    axios.get(getWsServer() + "/admin/api/v1/info"
+    )
+    .then(response => {
+      console.log(response.data);
+      console.log(`dbReadOnly = ${response.data.databaseReadOnly}`);
+      return response.data.databaseReadOnly;
+    })
+    .catch( (error) => {
+      return false; // when in doubt, protect it
+    });
   },
   getDbUserAuthPath: () => {
     return getDbServer() + user;

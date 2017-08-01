@@ -3,7 +3,7 @@ import Header from './components/Header'
 import {Labels} from 'ioc-liturgical-react';
 import Logo from './components/images/Logo';
 
-export class App extends React.Component {
+class App extends React.Component {
 
   constructor(props) {
     super(props);
@@ -51,22 +51,18 @@ export class App extends React.Component {
     return (
         <div className="App">
           <Logo/>
-          <Header
-              language={this.state.language.code}
-              labels={this.state.language.labels.header}
-              changeHandler={this.handleLanguageChange.bind(this)}
-          />
+          <Header/>
           <div className="row App-content-row">
             <div className="col-sm-12 col-md-12 col-lg-12">
               {this.props.children && React.cloneElement(this.props.children, {
                 labels: {
-                resultsTable: this.state.language.labels.resultsTable
-                , header: this.state.language.labels.header
-                , help: this.state.language.labels.help
-                , pageAbout: this.state.language.labels.pageAbout
-                , pageLogin: this.state.language.labels.pageLogin
-                , search: this.state.language.labels.search
-              }
+                  resultsTable: this.state.language.labels.resultsTable
+                  , header: this.state.language.labels.header
+                  , help: this.state.language.labels.help
+                  , pageAbout: this.state.language.labels.pageAbout
+                  , pageLogin: this.state.language.labels.pageLogin
+                  , search: this.state.language.labels.search
+                }
               })
               }
             </div>
@@ -77,3 +73,4 @@ export class App extends React.Component {
 }
 
 export default App;
+

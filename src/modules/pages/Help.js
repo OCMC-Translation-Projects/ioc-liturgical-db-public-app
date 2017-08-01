@@ -3,16 +3,29 @@
  */
 import React from 'react';
 import {HelpSearch} from 'ioc-liturgical-react'
+import { connect } from 'react-redux';
 
 export class Help extends React.Component {
   render() {
     console.log(this.props.labels.help);
     return (
         <div className="App-page App-help">
-          <HelpSearch labels={this.props.labels.help.search}/>
+          <HelpSearch labels={this.props.app.language.labels.help.search}/>
         </div>
     )
   }
 }
 
-export default Help;
+/**
+ * Maps the redux store state to this component's props.
+ * @param state
+ * @returns {{app: *}}
+ */
+function mapStateToProps(state) {
+  return (
+      {
+        app: state
+      }
+  );
+}
+export default connect(mapStateToProps) (Help);

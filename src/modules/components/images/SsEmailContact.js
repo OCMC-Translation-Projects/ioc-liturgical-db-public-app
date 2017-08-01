@@ -1,8 +1,10 @@
 import React from 'react'
 import screenShot from './graphics/emailDbOrg.png'
 
-export default React.createClass({
+class SsEmailContact extends React.Component {
   render() {
-    return <img role="presentation" src={screenShot} height="20pt" width="200pt"/>
+    return <img alt="Email Contact" role="presentation" src={screenShot} height="20pt" width="200pt"/>
   }
-})
+}
+
+export default SsEmailContact;

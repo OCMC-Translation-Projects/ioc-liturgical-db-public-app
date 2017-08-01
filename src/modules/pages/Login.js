@@ -5,8 +5,10 @@ import React from 'react';
 import auth from '../components/Auth'
 import {Login as IocLogin} from 'ioc-liturgical-react'
 import server from '../../config/server';
+import { connect } from 'react-redux';
+import Actions from '../../reducers/actionTypes';
 
-export class Login extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,24 +22,46 @@ export class Login extends React.Component {
   }
 
   setCredentials = (status, valid, username, password) => {
+    this.setState(
+        {
+          username: username
+          , password: password
+          , valid: valid
+        }
+    );
+
     auth.setCredentials(
         username
         , password
         , valid
     );
     if (status === 200) {
-      const { location } = this.props
+      const { location, router } = this.props;
       if (location.state && location.state.nextPathname) {
-        this.props.router.replace(location.state.nextPathname)
+        router.replace(location.state.nextPathname)
       } else {
-        this.props.router.replace('/')
+        router.replace('/')
       }
     }
   }
 
   onSubmit = (status, valid, username, password) => {
+    console.log(status);
     let theStatusMsg = "";
-    if (status !== 200) {
+    if (status === 200) {
+      this.setCredentials(status, valid, username,password);
+      console.log(`Login.onSubmit ${valid} ${username} ${password}`);
+      this.props.dispatch(
+          {
+            type: Actions.USER_LOGIN
+            , user: {
+              authenticated: valid
+              , username: username
+              , password: password
+            }
+          }
+      );
+    } else {
       theStatusMsg = this.props.labels.pageLogin.bad;
       this.setState(
           {
@@ -46,8 +70,6 @@ export class Login extends React.Component {
             , loginFormMsg: theStatusMsg
           }
       );
-    } else {
-      this.setCredentials(status, valid, username,password)
     }
   };
 
@@ -63,7 +85,7 @@ export class Login extends React.Component {
               username={this.state.username}
               password={this.state.password}
               loginCallback={this.onSubmit}
-              formPrompt={this.props.labels.pageLogin.prompt}
+              formPrompt={"Greetings! " + this.props.app.language.labels.pageLogin.prompt}
               formMsg={this.state.loginFormMsg}
               dropdownsCallback={this.dropdownsCallback}
           />
@@ -72,4 +94,17 @@ export class Login extends React.Component {
   }
 }
 
-export default Login;
+/**
+ * Maps the redux store state to this component's props.
+ * @param state
+ * @returns {{app: *}}
+ */
+function mapStateToProps(state) {
+  console.log(state);
+  return (
+      {
+        app: state
+      }
+  );
+}
+export default connect(mapStateToProps) (Login);
