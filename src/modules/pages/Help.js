@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 
 export class Help extends React.Component {
   render() {
-    console.log(this.props.labels.help);
     return (
         <div className="App-page App-help">
           <HelpSearch labels={this.props.app.language.labels.help.search}/>

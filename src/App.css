@@ -28,6 +28,14 @@ div.container-fluid {
     width: 1.3em;
 }
 
+.App-page-home-welcome-title {
+    text-align: center;
+    color: blue;
+}
+
+.App-page-home-welcome-text {
+    padding-left: 20px;
+}
 #basic-nav-dropdown {
     padding-top: 21px;
     padding-left: 22px;

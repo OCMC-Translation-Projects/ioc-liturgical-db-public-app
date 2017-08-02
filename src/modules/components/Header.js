@@ -32,7 +32,7 @@ export class Header extends React.Component {
           <Navbar fluid fixedTop inverse collapseOnSelect>
             <Navbar.Header >
               <Navbar.Brand>
-                <LinkContainer to="/search">
+                <LinkContainer to="/home">
                   <NavItem eventKey={1}>
                     <span className="App-title">IOC Liturgical Database</span>
                   </NavItem>
@@ -42,7 +42,7 @@ export class Header extends React.Component {
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav pullRight>
-                {this.props.app.user.authenticated ?
+                {! this.props.app.db.isProtected || this.props.app.user.authenticated ?
                     <LinkContainer to="/search">
                       <NavItem eventKey={2}>{<FontAwesome  className="App-header-ico" name="search"/>}{this.props.app.language.labels.header.search}</NavItem>
                     </LinkContainer>

@@ -37,14 +37,26 @@ var getWsServer = () => {
   }
 }
 
-
 export default {
-  isReadOnly: () => {
+  getDbInfo: () => {
+    return new Promise(function(resolve,reject) {
+      axios.get(getWsServer() + "/admin/api/v1/info"
+      )
+        .then(response => {
+          resolve(
+              response.data
+          );
+        })
+        .catch( (error) => {
+          reject(Error());
+        });
+    })
+  }
+  , isReadOnly: () => {
     axios.get(getWsServer() + "/admin/api/v1/info"
     )
     .then(response => {
-      console.log(response.data);
-      console.log(`dbReadOnly = ${response.data.databaseReadOnly}`);
+      console.log("ws responded");
       return response.data.databaseReadOnly;
     })
     .catch( (error) => {

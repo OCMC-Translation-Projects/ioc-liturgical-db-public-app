@@ -49,7 +49,7 @@ class Login extends React.Component {
     console.log(status);
     let theStatusMsg = "";
     if (status === 200) {
-      this.setCredentials(status, valid, username,password);
+//      this.setCredentials(status, valid, username,password);
       console.log(`Login.onSubmit ${valid} ${username} ${password}`);
       this.props.dispatch(
           {
@@ -61,8 +61,14 @@ class Login extends React.Component {
             }
           }
       );
+      const { location, router } = this.props;
+      if (location.state && location.state.nextPathname) {
+        router.replace(location.state.nextPathname)
+      } else {
+        router.replace('/')
+      }
     } else {
-      theStatusMsg = this.props.labels.pageLogin.bad;
+      theStatusMsg = this.props.app.language.labels.pageLogin.bad;
       this.setState(
           {
             username: username
@@ -85,7 +91,7 @@ class Login extends React.Component {
               username={this.state.username}
               password={this.state.password}
               loginCallback={this.onSubmit}
-              formPrompt={"Greetings! " + this.props.app.language.labels.pageLogin.prompt}
+              formPrompt={this.props.app.language.labels.pageLogin.prompt}
               formMsg={this.state.loginFormMsg}
               dropdownsCallback={this.dropdownsCallback}
           />
