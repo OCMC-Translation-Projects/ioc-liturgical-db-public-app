@@ -3,14 +3,11 @@
  */
 
 import React from 'react';
-import auth from '../components/Auth'
 import { connect } from 'react-redux';
 import Actions from '../../reducers/actionTypes';
 
 class Logout extends React.Component {
   componentDidMount() {
-//    console.log(`Logout.js logging out ${this.props.app.user.username}`);
-    auth.logout();
     this.props.dispatch(
       {
         type: Actions.USER_LOGOUT
@@ -18,14 +15,13 @@ class Logout extends React.Component {
     );
     const { location } = this.props
     if (location.state && location.state.nextPathname) {
-      this.props.router.replace(this.location.state.nextPathname)
+      this.props.history.replace(this.location.state.nextPathname)
     } else {
-      this.props.router.replace('/')
+      this.props.history.replace('/')
     }
   }
 
   render() {
-//    console.log(this.props.app);
     return <div className="App-page-logout"><p>You are now logged out...</p></div>
   }}
 

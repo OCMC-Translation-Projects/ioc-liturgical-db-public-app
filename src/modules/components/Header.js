@@ -1,6 +1,6 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 import {Flag} from 'ioc-liturgical-react';
 import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
@@ -32,11 +32,11 @@ export class Header extends React.Component {
           <Navbar fluid fixedTop inverse collapseOnSelect>
             <Navbar.Header >
               <Navbar.Brand>
-                <LinkContainer to="/home">
+                <IndexLinkContainer to="/home">
                   <NavItem eventKey={1}>
                     <span className="App-title">IOC Liturgical Database</span>
                   </NavItem>
-                </LinkContainer>
+                </IndexLinkContainer>
               </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
@@ -52,14 +52,19 @@ export class Header extends React.Component {
                 <LinkContainer to="/about">
                   <NavItem eventKey={4}>{<FontAwesome className="App-header-ico" name="info-circle"/>}{this.props.app.language.labels.header.about}</NavItem>
                 </LinkContainer>
+                  {this.props.app.user.authenticated ?
+                      <LinkContainer to="/admin">
+                        <NavItem eventKey={5}>{<FontAwesome className="App-header-ico"  name="lock"/>}{"Administer"}</NavItem>
+                      </LinkContainer>
+                    : ""}
                 <LinkContainer to="/help">
-                  <NavItem eventKey={5}>{<FontAwesome className="App-header-ico"  name="question-circle"/>}{this.props.app.language.labels.header.help}</NavItem>
+                  <NavItem eventKey={6}>{<FontAwesome className="App-header-ico"  name="question-circle"/>}{this.props.app.language.labels.header.help}</NavItem>
                 </LinkContainer>
-                <NavDropdown eventKey={6} title={<Flag code={this.props.app.language.code}/>} id="basic-nav-dropdown">
-                  <MenuItem eventKey={6.1} id="en" onClick={this.handleLanguageChange}><Flag code="en"/></MenuItem>
-                  <MenuItem eventKey={6.2} id="el" onClick={this.handleLanguageChange}><Flag code="el"/></MenuItem>
+                <NavDropdown eventKey={7} title={<Flag code={this.props.app.language.code}/>} id="basic-nav-dropdown">
+                  <MenuItem eventKey={7.1} id="en" onClick={this.handleLanguageChange}><Flag code="en"/></MenuItem>
+                  <MenuItem eventKey={7.2} id="el" onClick={this.handleLanguageChange}><Flag code="el"/></MenuItem>
                 </NavDropdown>
-                <NavDropdown eventKey={7} title={<FontAwesome name="user-o"/>} id="basic-nav-dropdown">
+                <NavDropdown eventKey={8} title={<FontAwesome name="user-o"/>} id="basic-nav-dropdown">
                   {! this.props.app.user.authenticated ?
                       <LinkContainer to="/login"><NavItem eventKey={7.1} >{<FontAwesome className="App-header-ico"  name="sign-in"/>}{this.props.app.language.labels.header.login}</NavItem></LinkContainer>
                       : <LinkContainer to="/logout"><NavItem eventKey={7.1} >{<FontAwesome className="App-header-ico"  name="sign-out"/>}{this.props.app.language.labels.header.logout}</NavItem></LinkContainer>

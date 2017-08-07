@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
-import {Alert, Glyphicon, Jumbotron} from 'react-bootstrap';
+import {Alert, Glyphicon} from 'react-bootstrap';
 
 class Home extends React.Component {
 

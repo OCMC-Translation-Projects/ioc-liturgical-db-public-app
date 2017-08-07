@@ -6,6 +6,14 @@ div.container-fluid {
     width: 100%;
     background-color: black;
 }
+p {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.App-content-row {
+    padding-left: 10px;
+    padding-right: 10px;
+}
 .App-header {
     z-index: -1;
 }
@@ -13,6 +21,9 @@ div.container-fluid {
     position: fixed;
     top: 18px;
     z-index: 2000;
+}
+.App-page-admin {
+
 }
 .App-title {
     z-index: 8999;
@@ -28,29 +39,33 @@ div.container-fluid {
     width: 1.3em;
 }
 
-.App-page-home-welcome-title {
-    text-align: center;
-    color: blue;
-}
-
-.App-page-home-welcome-text {
-    padding-left: 20px;
-}
 #basic-nav-dropdown {
     padding-top: 21px;
     padding-left: 22px;
 }
 .App-search-form {
     padding-top: 15px;
+    padding-bottom: 15px;
 }
 .App-search-panel {
-    cursor: pointer;
 }
 .App-text-search-icon {
     cursor: pointer;
 }
-.panel-title {
+.App-HyperToken {
+}
+.App-HyperToken-Index {
+    font-size: larger;
+}
+.App-HyperToken-Word {
+    color: blue;
     cursor: pointer;
+}
+.App-iframe-wrapper {
+    resize: vertical;
+}
+.App-font-awesome-spinner {
+    color: red;
 }
 .Navbar.Collapse {
     position: fixed;
@@ -66,8 +81,9 @@ div.container-fluid {
 }
 
 .panel-title {
-    color: #007eff;
+    color: #007eff !important;
     font-weight: bolder;
+    cursor: pointer;
 }
 
 .label-warning {
@@ -110,7 +126,7 @@ a.collapsed {
     color: black;
     background-color: white;
     height: auto;
-    width: 80%;
+    width: 76%;
     resize: vertical;
 }
 .App-search-by-id-parts-icon {
@@ -139,11 +155,14 @@ a.collapsed {
 .App-search-checkbox {
     margin: 10px;
 }
+.react-bs-table-container {
+    padding: 14px;
+}
 .react-bs-table table tr {
-    padding: 10px;
+    max-width: 80%;
 }
 .react-bs-table table td {
-    white-space: -o-pre-wrap;
+    white-space: -o-pre-wrap !important;
     word-wrap: break-word;
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;
@@ -226,7 +245,142 @@ div.App-logo.navbar-header {
     overflow: scroll;
 }
 
+.App-demo-version {
+    margin-left: 20px;
+    color: #5bc0de;
+}
+.App-Para-Col-Editor .resourceSelector {
+    padding-left: 15px;
+}
+.App-table-filter-clear {
+    float: right;
+}
 .Select-control {
+    max-width: 80%;
+}
+.App-Label-Selector-POS .Select-control{
+    float: left;
+    width: 45ch;
+}
+.App-Label-Selector-Tense .Select-control {
+    width: 45ch;
+}
+.App-Label-Selector-Voice .Select-control {
+    width: 45ch;
+}
+.App-Label-Selector-Mood .Select-control {
+    width: 45ch;
+}
+.App-Label-Selector-Gender .Select-control {
+    width: 45ch;
+}
+.App-Label-Selector-Number .Select-control {
+    width: 45ch;
+}
+.App-Label-Selector-Case .Select-control {
+    width: 45ch;
+}
+.App-WordTagger-Lemma {
+    width: 45ch;
+}
+.App-WordTagger-Gloss {
+    width: 45ch;
+}
+.App-data-tr {
     max-width: 90%;
+}
+
+textarea { resize: both; }
+
+svg {
+    background-color: black;
+}
+.node circle {
+    fill: #F3F3FF;
+    stroke: #2593B8;
+    stroke-width: 1.5px;
+}
+
+.node text {
+    font-size: 11px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #444;
+    fill: gold;
+    text-shadow: 0 1px 4px black;
+}
+
+path.link {
+    fill: none;
+    stroke: #2593B8;
+    stroke-width: 1.5px;
+}
+
+.AppDependencyNode {
+    cursor: pointer;
+}
+
+.AppDependencyNodeToken {
+    color: blue;
+    font-size: large;
+}
+.AppDependencyNodeLemma {
+    color: blue;
+    font-size: small;
+}
+.AppDependencySelectedNode {
+    background-color: #bfe6ff;
+}
+.AppDependencyNodeGloss {
+    font-size: small;
+}
+.AppDependencyNodeLabel {
+    text-align: center;
+    color: red;
+    font-style: italic;
+    font-size: xx-small;
+}
+.App-Modal-Para-Row-Editor {
+    width: 90vw;
+}
+.App-modal-body {
+    background-color: #eaeced;
+}
+.alert {
+    margin-top: 10px;
+}
+.App-modal-alert {
+    margin: 10px;
+}
+.glyphicon {
+    padding-right: 10px;
+}
+.App-Selection-Row {
+    margin-top: 10px;
+    width: 100%;
+}
+.App-Ages-Table-Row {
+    margin-top: 10px;
+}
+.App-Info-Row {
+    margin-top: 10px;
+}
+.App-Grid {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+}
+.App-Modal-Editor-TextArea {
+    width: 100%;
+}
+
+.App-page-home-welcome-title {
+    text-align: center;
+    color: blue;
+}
+
+.App-page-home-welcome-text {
+    padding-left: 20px;
 }
 

@@ -2,7 +2,6 @@
  * Created by mac002 on 12/7/16.
  */
 import React from 'react';
-import auth from '../components/Auth'
 import {Login as IocLogin} from 'ioc-liturgical-react'
 import server from '../../config/server';
 import { connect } from 'react-redux';
@@ -17,40 +16,12 @@ class Login extends React.Component {
       ,loginFormMsg: ""
     }
     this.onSubmit = this.onSubmit.bind(this);
-    this.setCredentials = this.setCredentials.bind(this);
-    this.dropdownsCallback = this.dropdownsCallback.bind(this);
-  }
-
-  setCredentials = (status, valid, username, password) => {
-    this.setState(
-        {
-          username: username
-          , password: password
-          , valid: valid
-        }
-    );
-
-    auth.setCredentials(
-        username
-        , password
-        , valid
-    );
-    if (status === 200) {
-      const { location, router } = this.props;
-      if (location.state && location.state.nextPathname) {
-        router.replace(location.state.nextPathname)
-      } else {
-        router.replace('/')
-      }
-    }
+    this.handleDropdownsCallback = this.handleDropdownsCallback.bind(this);
   }
 
   onSubmit = (status, valid, username, password) => {
-    console.log(status);
-    let theStatusMsg = "";
+    let theStatusMsg = this.props.app.language.labels.pageLogin.good;
     if (status === 200) {
-//      this.setCredentials(status, valid, username,password);
-      console.log(`Login.onSubmit ${valid} ${username} ${password}`);
       this.props.dispatch(
           {
             type: Actions.USER_LOGIN
@@ -61,12 +32,13 @@ class Login extends React.Component {
             }
           }
       );
-      const { location, router } = this.props;
-      if (location.state && location.state.nextPathname) {
-        router.replace(location.state.nextPathname)
-      } else {
-        router.replace('/')
-      }
+      this.setState(
+          {
+            username: username
+            , password: password
+            , loginFormMsg: theStatusMsg
+          }
+      );
     } else {
       theStatusMsg = this.props.app.language.labels.pageLogin.bad;
       this.setState(
@@ -79,9 +51,26 @@ class Login extends React.Component {
     }
   };
 
-  dropdownsCallback = () => {
-
+  handleDropdownsCallback = (response) => {
+    let forms = response.data;
+    this.props.dispatch(
+        {
+          type: Actions.SET_DROPDOWNS
+          , formsLoaded: true
+          , forms: forms.data
+          , domains: forms.domains
+          , formsDropdown: forms.formsDropdown
+          , formsValueSchemas: forms.valueSchemas
+          , formsValues: forms.values
+          , ontologyDropdowns: forms.ontologyDropdowns
+          , biblicalBooksDropdown: forms.biblicalBooksDropdown
+          , biblicalChaptersDropdown: forms.biblicalChaptersDropdown
+          , biblicalVersesDropdown: forms.biblicalVersesDropdown
+          , biblicalSubversesDropdown: forms.biblicalSubversesDropdown
+        }
+    )
   }
+
 
   render() {
     return (
@@ -93,7 +82,7 @@ class Login extends React.Component {
               loginCallback={this.onSubmit}
               formPrompt={this.props.app.language.labels.pageLogin.prompt}
               formMsg={this.state.loginFormMsg}
-              dropdownsCallback={this.dropdownsCallback}
+              dropdownsCallback={this.handleDropdownsCallback}
           />
         </div>
     );
