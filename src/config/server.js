@@ -14,7 +14,11 @@ var getDbServer = () => {
 }
 
 var getWsServer = () => {
-  return document.location.protocol +  "//" + document.location.hostname + ":4567";
+  if (document.location.hostname === "localhost") {
+    return document.location.protocol +  "//" + document.location.hostname + ":4567";
+  } else {
+    return document.location.protocol +  "//" + document.location.hostname;
+  }
 }
 
 export default {
