@@ -2,7 +2,7 @@
  * Created by mac002 on 12/7/16.
  */
 import React from 'react';
-import {Login as IocLogin} from 'ioc-liturgical-react'
+import {Login as IocLogin, UiSchemas} from 'ioc-liturgical-react'
 import server from '../../config/server';
 import { connect } from 'react-redux';
 import Actions from '../../reducers/actionTypes';
@@ -19,17 +19,23 @@ class Login extends React.Component {
     this.handleDropdownsCallback = this.handleDropdownsCallback.bind(this);
   }
 
-  onSubmit = (status, valid, username, password) => {
-    let theStatusMsg = this.props.app.language.labels.pageLogin.good;
+  onSubmit = (status, valid, username, password, userinfo) => {
+    let theStatusMsg = this.props.app.session.labels.pageLogin.good;
     if (status === 200) {
+      let userInfo = {
+        username: username
+        , password: password
+        , firstName: userinfo.firstname
+        , lastName: userinfo.lastname
+        , title: userinfo.title
+        , domain: userinfo.domain
+        , email: userinfo.email
+        , authenticated: valid
+      }
       this.props.dispatch(
           {
-            type: Actions.USER_LOGIN
-            , user: {
-              authenticated: valid
-              , username: username
-              , password: password
-            }
+            type: Actions.SET_SESSION_USER_LOGIN
+            , userInfo: userInfo
           }
       );
       this.setState(
@@ -53,20 +59,35 @@ class Login extends React.Component {
 
   handleDropdownsCallback = (response) => {
     let forms = response.data;
+    let domains = forms.domains;
+    let uiSchemas = new UiSchemas(
+        forms.formsDropdown
+        , forms.valueSchemas
+        , forms.values
+    );
+    let dropdowns = {
+      biblicalBooksDropdown: forms.biblicalBooksDropdown
+      , biblicalChaptersDropdown: forms.biblicalChaptersDropdown
+      , biblicalVersesDropdown: forms.biblicalVersesDropdown
+      , biblicalSubversesDropdown: forms.biblicalSubversesDropdown
+      , formsDropdown: forms.formsDropdown
+      , ontologyTypesDropdown: forms.ontologyTypesDropdown
+      , templateNewTemplateDropdown: forms.templateNewTemplateDropdown
+      , templatePartsDropdown: forms.templatePartsDropdown
+      , templateWhenDayNameCasesDropdown: forms.templateWhenDayNameCasesDropdown
+      , templateWhenDayOfMonthCasesDropdown: forms.templateWhenDayOfMonthCasesDropdown
+      , templateWhenDayOfSeasonCasesDropdown: forms.templateWhenDayOfSeasonCasesDropdown
+      , templateWhenModeOfWeekCasesDropdown: forms.templateWhenModeOfWeekCasesDropdown
+      , templateWhenMonthNameCasesDropdown: forms.templateWhenMonthNameCasesDropdown
+    };
     this.props.dispatch(
         {
-          type: Actions.SET_DROPDOWNS
+          type: Actions.SET_SESSION_DROPDOWNS
           , formsLoaded: true
           , forms: forms.data
-          , domains: forms.domains
-          , formsDropdown: forms.formsDropdown
-          , formsValueSchemas: forms.valueSchemas
-          , formsValues: forms.values
-          , ontologyDropdowns: forms.ontologyDropdowns
-          , biblicalBooksDropdown: forms.biblicalBooksDropdown
-          , biblicalChaptersDropdown: forms.biblicalChaptersDropdown
-          , biblicalVersesDropdown: forms.biblicalVersesDropdown
-          , biblicalSubversesDropdown: forms.biblicalSubversesDropdown
+          , domains: domains
+          , uiSchema: uiSchemas
+          , dropdowns: dropdowns
         }
     )
   }
@@ -80,7 +101,7 @@ class Login extends React.Component {
               username={this.state.username}
               password={this.state.password}
               loginCallback={this.onSubmit}
-              formPrompt={this.props.app.language.labels.pageLogin.prompt}
+              formPrompt={this.props.app.session.labels.pageLogin.prompt}
               formMsg={this.state.loginFormMsg}
               dropdownsCallback={this.handleDropdownsCallback}
           />
@@ -95,7 +116,6 @@ class Login extends React.Component {
  * @returns {{app: *}}
  */
 function mapStateToProps(state) {
-  console.log(state);
   return (
       {
         app: state

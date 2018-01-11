@@ -36,6 +36,11 @@ function PrivateRoute ({component: Component, authed, ...rest}) {
 class App extends React.Component {
 
   componentWillMount = () => {
+    this.props.dispatch({
+          type: Actions.SET_SESSION_REST_SERVER
+          , restServer: server.getWsServerPath()
+        }
+    );
     server.getDbInfo()
         .then(response => {
           let {
@@ -44,24 +49,30 @@ class App extends React.Component {
             , databaseReadOnly
             , databaseProtected
           } = response;
+          let db = {
+            domain: dbServerDomain
+            , isProtected: databaseProtected
+            , isReadOnly: databaseReadOnly
+            , wsVersion: wsVersion
+          };
           this.props.dispatch(
               {
-                type: Actions.DB_SET_INFO
-                , domain: dbServerDomain
-                , isProtected: databaseProtected
-                , isReadOnly: databaseReadOnly
-                , wsVersion: wsVersion
+                type: Actions.SET_SESSION_DB_INFO
+                , db: db
               }
           );
         })
         .catch((error) => {
+          let db = {
+            domain: undefined
+            , isProtected: true
+            , isReadOnly: false
+            , wsVersion: undefined
+          };
           this.props.dispatch(
               {
-                type: Actions.DB_SET_INFO
-                , domain: undefined
-                , isProtected: true
-                , isReadOnly: false
-                , wsVersion: undefined
+                type: Actions.SET_SESSION_DB_INFO
+                , db: db
               }
           );
         });
@@ -78,15 +89,14 @@ class App extends React.Component {
               <div className="row App-content-row">
                 <div className="col-sm-12 col-md-12 col-lg-12">
                   <Route exact path="/" component={Home} />
-                  <Route path="/about" component={About} />
                   <PrivateRoute
-                      authed={this.props.app.user.authenticated}
+                      authed={this.props.app.session.userInfo.authenticated}
                       path='/search'
                       component={Search}
                   />
                   <Route path="/home" component={Home}/>
                   <PrivateRoute
-                      authed={this.props.app.user.authenticated}
+                      authed={this.props.app.session.userInfo.authenticated}
                       path='/admin'
                       component={Admin}
                   />

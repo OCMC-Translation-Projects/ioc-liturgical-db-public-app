@@ -9,7 +9,7 @@ export class Help extends React.Component {
   render() {
     return (
         <div className="App-page App-help">
-          <HelpSearch labels={this.props.app.language.labels.help.search}/>
+          <HelpSearch labels={this.props.app.session.labels.help.search}/>
         </div>
     )
   }

@@ -10,7 +10,7 @@ class Logout extends React.Component {
   componentDidMount() {
     this.props.dispatch(
       {
-        type: Actions.USER_LOGOUT
+        type: Actions.SET_SESSION_USER_LOGOUT
       }
     );
     const { location } = this.props

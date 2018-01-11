@@ -9,16 +9,18 @@ class About extends React.Component {
   render() {
     const version = VersionNumbers.getPackageNumber();
     return <div className="App-page App-page-about">
-      <AboutDatabase labels={this.props.app.language.labels.pageAbout}/>
-      {this.props.app.language.labels.pageAbout.contact} <Email />
+      <AboutDatabase labels={this.props.app.session.labels.pageAbout}/>
+      {this.props.app.session.labels.pageAbout.contact} <Email />
       <p/>
       <Configuration
           appVersion={version}
-          appVersionLabel={this.props.app.language.labels.pageAbout.appVersion}
+          appVersionLabel={this.props.app.session.labels.pageAbout.appVersion}
           restServer={server.getWsServerPath()}
-          restServerLabel={this.props.app.language.labels.pageAbout.RestServer}
-          wsVersionLabel={this.props.app.language.labels.pageAbout.wsVersion}
-          dbServerLabel={this.props.app.language.labels.pageAbout.DbServer}
+          restServerLabel={this.props.app.session.labels.pageAbout.RestServer}
+          wsVersionLabel={this.props.app.session.labels.pageAbout.wsVersion}
+          dbServerLabel={this.props.app.session.labels.pageAbout.DbServer}
+          synchEnabledLabel={this.props.app.session.labels.pageAbout.synchEnabled}
+          synchDbConnectionOkLabel={this.props.app.session.labels.pageAbout.synchDbConnectionOk}
       />
     </div>
   }

@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import { connect } from 'react-redux';
-import server from '../../config/server';
 import {SearchText} from 'ioc-liturgical-react';
 
 class SearchPage extends React.Component {
@@ -13,11 +12,9 @@ render() {
     return (
         <div className="App-page App-search">
           <SearchText
-              restServer={server.getWsServerPath()}
-              username={this.props.app.user.username}
-              password={this.props.app.user.password}
-              searchLabels={this.props.app.language.labels.search}
-              resultsTableLabels={this.props.app.language.labels.resultsTable}
+              session={this.props.app.session}
+              searchLabels={this.props.app.session.labels.search}
+              resultsTableLabels={this.props.app.session.labels.resultsTable}
               initialDocType="Liturgical"
           />
         </div>

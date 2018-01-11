@@ -18,7 +18,7 @@ export class Header extends React.Component {
     if (event.target.id) {
       this.props.dispatch(
           {
-            type: Actions.LANGUAGE_SET_CODE
+            type: Actions.SET_SESSION_LANGUAGE_CODE
             , code: event.target.id
           }
       );
@@ -34,7 +34,7 @@ export class Header extends React.Component {
               <Navbar.Brand>
                 <IndexLinkContainer to="/home">
                   <NavItem eventKey={1}>
-                    <span className="App-title">IOC Liturgical Database</span>
+                    <span className="App-title">Liturgical Database</span>
                   </NavItem>
                 </IndexLinkContainer>
               </Navbar.Brand>
@@ -42,32 +42,32 @@ export class Header extends React.Component {
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav pullRight>
-                {! this.props.app.db.isProtected || this.props.app.user.authenticated ?
+                {! this.props.app.session.db.isProtected || this.props.app.session.userInfo.authenticated ?
                     <LinkContainer to="/search">
-                      <NavItem eventKey={2}>{<FontAwesome  className="App-header-ico" name="search"/>}{this.props.app.language.labels.header.search}</NavItem>
+                      <NavItem eventKey={2}>{<FontAwesome  className="App-header-ico" name="search"/>}{this.props.app.session.labels.header.search}</NavItem>
                     </LinkContainer>
                     :
                     ""
                 }
                 <LinkContainer to="/about">
-                  <NavItem eventKey={4}>{<FontAwesome className="App-header-ico" name="info-circle"/>}{this.props.app.language.labels.header.about}</NavItem>
+                  <NavItem eventKey={4}>{<FontAwesome className="App-header-ico" name="info-circle"/>}{this.props.app.session.labels.header.about}</NavItem>
                 </LinkContainer>
-                  {this.props.app.user.authenticated ?
+                  {this.props.app.session.userInfo.authenticated ?
                       <LinkContainer to="/admin">
                         <NavItem eventKey={5}>{<FontAwesome className="App-header-ico"  name="lock"/>}{"Administer"}</NavItem>
                       </LinkContainer>
                     : ""}
                 <LinkContainer to="/help">
-                  <NavItem eventKey={6}>{<FontAwesome className="App-header-ico"  name="question-circle"/>}{this.props.app.language.labels.header.help}</NavItem>
+                  <NavItem eventKey={6}>{<FontAwesome className="App-header-ico"  name="question-circle"/>}{this.props.app.session.labels.header.help}</NavItem>
                 </LinkContainer>
-                <NavDropdown eventKey={7} title={<Flag code={this.props.app.language.code}/>} id="basic-nav-dropdown">
+                <NavDropdown eventKey={7} title={<Flag code={this.props.app.session.languageCode}/>} id="basic-nav-dropdown">
                   <MenuItem eventKey={7.1} id="en" onClick={this.handleLanguageChange}><Flag code="en"/></MenuItem>
                   <MenuItem eventKey={7.2} id="el" onClick={this.handleLanguageChange}><Flag code="el"/></MenuItem>
                 </NavDropdown>
                 <NavDropdown eventKey={8} title={<FontAwesome name="user-o"/>} id="basic-nav-dropdown">
-                  {! this.props.app.user.authenticated ?
-                      <LinkContainer to="/login"><NavItem eventKey={7.1} >{<FontAwesome className="App-header-ico"  name="sign-in"/>}{this.props.app.language.labels.header.login}</NavItem></LinkContainer>
-                      : <LinkContainer to="/logout"><NavItem eventKey={7.1} >{<FontAwesome className="App-header-ico"  name="sign-out"/>}{this.props.app.language.labels.header.logout}</NavItem></LinkContainer>
+                  {! this.props.app.session.userInfo.authenticated ?
+                      <LinkContainer to="/login"><NavItem eventKey={7.1} >{<FontAwesome className="App-header-ico"  name="sign-in"/>}{this.props.app.session.labels.header.login}</NavItem></LinkContainer>
+                      : <LinkContainer to="/logout"><NavItem eventKey={7.1} >{<FontAwesome className="App-header-ico"  name="sign-out"/>}{this.props.app.session.labels.header.logout}</NavItem></LinkContainer>
                   }
                 </NavDropdown>
               </Nav>

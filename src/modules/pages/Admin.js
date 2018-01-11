@@ -5,25 +5,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Administrator} from 'ioc-liturgical-react';
-import server from '../../config/server';
 
 class Admin extends React.Component {
-
-
-  componentDidMount() {
-  }
-
   render() {
     return (
-    <div className="App-page-admin"><p>Admin page...</p>
-      <Administrator
-          restServer={server.getWsServerPath()}
-          username={this.props.app.user.username}
-          password={this.props.app.user.password}
-          languageCode={this.props.app.language.code}
-          domains={this.props.app.dropdowns.domains}
-      />
-    </div>
+        <div className="App-page-admin"><p>Admin page...</p>
+          <Administrator
+              session={this.props.app.session}
+          />
+        </div>
     )
   }
 }
