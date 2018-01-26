@@ -79,6 +79,7 @@ class Login extends React.Component {
       , templateWhenDayOfSeasonCasesDropdown: forms.templateWhenDayOfSeasonCasesDropdown
       , templateWhenModeOfWeekCasesDropdown: forms.templateWhenModeOfWeekCasesDropdown
       , templateWhenMonthNameCasesDropdown: forms.templateWhenMonthNameCasesDropdown
+      , liturgicalBooksDropdown: forms.liturgicalBooksDropdown
     };
     this.props.dispatch(
         {

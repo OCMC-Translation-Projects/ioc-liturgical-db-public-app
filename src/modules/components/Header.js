@@ -5,6 +5,7 @@ import {Flag} from 'ioc-liturgical-react';
 import FontAwesome from 'react-fontawesome';
 import { connect } from 'react-redux';
 import Actions from '../../reducers/actionTypes';
+import Logo from './images/Logo';
 
 export class Header extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ export class Header extends React.Component {
               <Navbar.Brand>
                 <IndexLinkContainer to="/home">
                   <NavItem eventKey={1}>
+                    <Logo/>
                     <span className="App-title">Liturgical Database</span>
                   </NavItem>
                 </IndexLinkContainer>
